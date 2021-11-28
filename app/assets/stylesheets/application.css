@@ -1,0 +1,372 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+.notice {
+    color: red
+}
+
+.none {
+    display: none !important;
+}
+
+.flex {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.header {
+    background-color: orange;
+}
+
+.flex-bundle {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;
+}
+
+.flex1 {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1
+}
+
+
+/* flex properties */
+
+.space-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.space-around {
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+}
+
+.hoverable:hover {
+    text-decoration: underline;
+    color: black;
+}
+
+.vertical {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.v-center {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.wrap {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.nowrap {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+.center {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.align-baseline {
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+}
+
+.align-left {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+
+.align-right {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+
+
+/* input box size  */
+
+.input1 {
+    width: 200px;
+}
+
+
+/* btn size  */
+
+.btn1 {
+    width: 200px;
+}
+
+
+/* space */
+
+
+/* left */
+
+.left-space {
+    margin-left: 5px;
+}
+
+.left-space-l {
+    margin-left: 10px;
+}
+
+.left-space-ll {
+    margin-left: 15px;
+}
+
+.left-space-lll {
+    margin-left: 20px;
+}
+
+.left-space-llll {
+    margin-left: 25px;
+}
+
+.left-space-lllll {
+    margin-left: 30px;
+}
+
+
+/* right */
+
+.right-space {
+    margin-right: 5px;
+}
+
+.right-space-l {
+    margin-right: 10px;
+}
+
+.right-space-ll {
+    margin-right: 15px;
+}
+
+.right-space-lll {
+    margin-right: 20px;
+}
+
+.right-space-llll {
+    margin-right: 25px;
+}
+
+.right-space-lllll {
+    margin-right: 30px;
+}
+
+
+/* top */
+
+.top-space {
+    margin-top: 30px;
+}
+
+.top-space-s {
+    margin-top: 20px;
+}
+
+.top-space-ss {
+    margin-top: 10px;
+}
+
+.top-space-sss {
+    margin-top: 5px;
+}
+
+
+/* bottom */
+
+.bottom-space {
+    margin-bottom: 30px;
+}
+
+.bottom-space-s {
+    margin-bottom: 20px;
+}
+
+.bottom-space-ss {
+    margin-bottom: 10px;
+}
+
+.bottom-space-sss {
+    margin-bottom: 5px;
+}
+
+.bottom-space-l {
+    margin-bottom: 40px;
+}
+
+.bottom-space-ll {
+    margin-bottom: 50px;
+}
+
+.bottom-space-lll {
+    margin-bottom: 60px;
+}
+
+
+/* top */
+
+.n-top {
+    margin-top: -5px;
+}
+
+.n-top-l {
+    margin-top: -10px;
+}
+
+.n-top-ll {
+    margin-top: -20px;
+}
+
+
+/* text */
+
+.bold {
+    font-weight: bold;
+}
+
+.thin {
+    font-weight: 300;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.font8 {
+    font-size: 8px;
+}
+
+.font10 {
+    font-size: 10px;
+}
+
+.font12 {
+    font-size: 12px;
+}
+
+.font14 {
+    font-size: 14px;
+}
+
+.font16 {
+    font-size: 16px;
+}
+
+.font18 {
+    font-size: 18px;
+}
+
+.font20 {
+    font-size: 20px;
+}
+
+.font32 {
+    font-size: 32px;
+}
+
+.font64 {
+    font-size: 64px;
+}
+
+
+/* footer */
+
+footer {
+    width: 100%;
+    height: 60px;
+    font-size: 14px;
+}
+
+.header {
+    width: 100%;
+    height: 60px;
+    font-size: 14px;
+}
+
+
+/* overflow */
+
+.autoflow {
+    overflow: auto;
+}
+
+.hideflow {
+    overflow: hidden;
+}
+
+
+/* width */
+
+.fullwidth {
+    width: 100%;
+}
+
+
+/* input box*/
+
+.input {
+    border: none !important;
+    background: rgb(243, 243, 243) !important;
+}
+
+
+/* color */
+
+.red {
+    color: red;
+}
+
+.black {
+    color: black;
+}
+
+.gray {
+    color: gray;
+}
+
+.auto-width {
+    width: auto;
+}
+
+.min-width {
+    min-width: 500px !important;
+}

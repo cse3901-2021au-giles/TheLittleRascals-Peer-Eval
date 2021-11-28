@@ -1,0 +1,49 @@
+
+<% if @is_temp_user %>
+<h1> Add New Student</h1>
+<%= form_for @user do |f| %>
+    <%= f.label :fname %>
+    <%= f.text_field :fname, :required =>  true%>
+    <br>
+    <%= f.label :lname %>
+    <%= f.text_field :lname, :required =>  true%>
+    <br>
+    <%= f.label :email %>
+    <%= f.text_field :email, :required =>  true%>
+    <br>
+    <div class="none">
+    <%= f.label :password %>
+    <%= f.password_field :password, :required =>  true%>
+    <br>
+    </div>
+    <%= f.label :admin %>
+    <%= f.check_box :admin%>
+    <br>
+    <%= hidden_field_tag(:temp_user, '')%>
+    <%= f.submit "Create Account"%>
+
+<% end %>
+
+<% else%>
+<h1> New Users Page</h1>
+<%= form_for @user do |f| %>
+    <%= f.label :fname %>
+    <%= f.text_field :fname, :required =>  true%>
+    <br>
+    <%= f.label :lname %>
+    <%= f.text_field :lname, :required =>  true%>
+    <br>
+    <%= f.label :email %>
+    <%= f.text_field :email, :required =>  true%>
+    <br>
+    <%= f.label :password %>
+    <%= f.password_field :password, :required =>  true%>
+    <br>
+    <%= f.label :admin %>
+    <%= f.check_box :admin%>
+    <br>
+    <%= f.submit "Create Account" %>
+
+<% end %>
+
+<% end %>

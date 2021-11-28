@@ -1,0 +1,17 @@
+<div class="notice"><%= notice %> </div>
+<%= form_for @user do |f| %>
+    <%= f.label :fname %>
+    <%= f.text_field :fname, value:@user_info.fname, :required =>  true%>
+    <br>
+    <%= f.label :lname %>
+    <%= f.text_field :lname, value:@user_info.lname, :required =>  true%>
+    <br>
+    <%= f.label :email %>
+    <%= f.text_field :email, value:@user_info.email, :required =>  true%>
+    <br>
+    <%= f.label :password %>
+    <%= f.password_field :password, :required =>  true%>
+    <br>
+    <%= f.submit "Save Changes", class: "btn btn-primary" %>
+
+    <% end %>

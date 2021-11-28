@@ -1,0 +1,23 @@
+     <div id="add-user" class="none"> 
+          <%= form_for @temp_user do |f| %>
+               <%= f.label :fname %>
+               <%= f.text_field :fname, :required =>  true%>
+               <br>
+                    <%= f.label :lname %>
+               <%= f.text_field :lname, :required =>  true%>
+               <br>
+               <%= f.label :email %>
+               <%= f.text_field :email, :required =>  true%>
+               <div class="none">
+               <%= f.label :password %>
+               <%= f.text_field :password %>
+               <br>
+               </div>
+               <br>
+                   <%= f.label :admin %>
+                    <%= f.check_box :admin%>
+               <br>
+               <%= f.submit "Create Account" %>
+
+          <% end %>
+     </div>

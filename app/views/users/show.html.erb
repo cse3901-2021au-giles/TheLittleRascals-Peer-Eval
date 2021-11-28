@@ -1,0 +1,35 @@
+<%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
+<div>
+     <p class="notice"><%= notice %> </p>
+     
+     <div class="info-area header  ">
+          <div>You are logged in as</div>
+          <div class="flex"><%= @user.fname%>
+          <%= @user.lname%>
+          <%= @user.email%>
+          <%= button_to "Logout", logout_path, method: :post%>
+          <%= button_to "Update Profile", edit_user_path, method: :get%>
+          </div>
+     </div>
+     
+     <% if @user.admin %>
+     <div class="top-space">
+     <%= button_to "Add Student", new_user_path, method: :get, form: {target: '_placeholder'}, params: {:temp_user => true}%>
+     </div>
+     <div class="font20">Your Students</div>
+     <div>
+          
+          <% @students.each do |student|%>
+          <div class="flex">
+          <div><%= student.fname%></div>
+          &nbsp
+          <div><%= student.lname%></div>
+          &nbsp
+          <div><%= link_to "delete", student, method: :delete %></div>
+          </div>
+          <% end %>
+          
+     </div>
+     
+     <%end%>
+</div>
