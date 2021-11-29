@@ -38,9 +38,11 @@ class TeamsController < ApplicationController
                 render :new
             end 
         end 
+    end 
 
-
-
+    def show_teams
+        @project = Project.find(params['project_id'])
+        @user = User.find(params['user_id'])
     end 
 
 

@@ -1,0 +1,14 @@
+<%= form_for @poll do |f| %>
+    <%= f.label :description %>
+    <%= f.text_field :description, :required =>  true%>
+    <br>
+    <%= label_tag :end_date_from_now%>
+    <%= text_field_tag 'time', value = nil, :required => true%>
+    <br>
+    <div class="none">
+    <%= hidden_field_tag(:group_id, @group_id)%>
+    <%= hidden_field_tag(:project_id, @project_id)%>
+    </div>
+    <%= f.submit "Send Poll"%>
+
+<% end %>

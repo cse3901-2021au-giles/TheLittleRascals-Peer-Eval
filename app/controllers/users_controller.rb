@@ -49,8 +49,9 @@ class UsersController < ApplicationController
 
             # creating grouping relationship
             @grouping = Grouping.new
+
             puts "Creating new grouping-------------------------------------"
-            puts @group.id
+            puts params[:group]
             @grouping.group_id = @group.id
             @grouping.user_id = @user.id
             @grouping.save

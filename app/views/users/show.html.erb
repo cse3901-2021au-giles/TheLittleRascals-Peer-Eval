@@ -33,7 +33,7 @@
 
      <div class="flex">
           <div id="student-display">
-          <div class="font20">Your Group</div>
+          <div class="font20">Your Class</div>
           <div>
           
           <% @group.users.each do |student|%>
@@ -66,11 +66,17 @@
                
                     <%= project.name%>
                     <%= project.description%>
+                    <%= link_to "delete", project, method: :delete %>
+                    <div class="flex">
                     <% if !project.has_team%>
-                    <%= button_to "Create  Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
+                    <%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
                     <% else%>
-                    <%= button_to "View  Teams", project_path, method: :get, params: {:project_id => project.id, :user_id => @user.id}%>
+                    <%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}%>
+                    <%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
+                    <%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
                     <%end%>
+                    
+                    </div>
                     </div>
                <%end%>   
           </div>

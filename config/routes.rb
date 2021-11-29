@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :results
+  resources :polls
   resources :teams
   resources :users, only: [:new, :create, :edit, :update, :show, :destroy]
    get '/login', to: 'sessions#login'
@@ -8,5 +10,7 @@ Rails.application.routes.draw do
    match '/users/*all/edit', to: 'users#update', via: :post
   resources :students
   resources :projects
+   get '/view-teams', to: 'teams#show_teams'
+   get '/view-results', to: 'polls#show_polls'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

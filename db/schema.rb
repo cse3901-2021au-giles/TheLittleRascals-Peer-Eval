@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_025156) do
+ActiveRecord::Schema.define(version: 2021_11_29_190537) do
 
   create_table "groupings", force: :cascade do |t|
     t.integer "user_id"
@@ -27,6 +27,22 @@ ActiveRecord::Schema.define(version: 2021_11_29_025156) do
     t.integer "owner"
   end
 
+  create_table "pollings", force: :cascade do |t|
+    t.integer "poll_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "polls", force: :cascade do |t|
+    t.integer "project_id"
+    t.string "description"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "group_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.integer "group_id"
     t.string "name"
@@ -34,6 +50,18 @@ ActiveRecord::Schema.define(version: 2021_11_29_025156) do
     t.boolean "has_team"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.integer "poll_id"
+    t.integer "rater_id"
+    t.integer "ratee_id"
+    t.integer "score"
+    t.string "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "team_id"
+    t.boolean "is_complete"
   end
 
   create_table "students", force: :cascade do |t|

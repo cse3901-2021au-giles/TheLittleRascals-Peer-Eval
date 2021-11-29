@@ -21,7 +21,14 @@ class ProjectsController < ApplicationController
         @user = User.find(params['user_id'])
     end 
 
+    def destroy
+        Project.find(params[:id]).destroy
+        redirect_to user_path(session[:current_user]), notice: "Project deleted"
+    end 
+
     def project_params
         params.require(:project).permit(:name, :description)
     end
+
+    
 end
