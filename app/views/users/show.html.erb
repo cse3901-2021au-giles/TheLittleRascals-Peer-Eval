@@ -10,26 +10,71 @@
           <%= button_to "Logout", logout_path, method: :post%>
           <%= button_to "Update Profile", edit_user_path, method: :get%>
           </div>
+          <div class="flex">
+               <% if @user.admin%>
+                    <div> Your Manage Group # </div>
+                    <%= @user.groups.first.id%>
+                    <%= @user.groups.first.name%>
+
+               <% else %>
+                    <div> Your groups are: </div>
+                    <% @user.groups.each do |group| %>
+                    <div><%= group.name%></div>
+                    <% end %>
+               <% end %>
+          </div>
      </div>
      
      <% if @user.admin %>
-     <div class="top-space">
-     <%= button_to "Add Student", new_user_path, method: :get, form: {target: '_placeholder'}, params: {:temp_user => true}%>
+     <div class="top-space flex">
+     <%= button_to "Add Student", new_user_path, method: :get, params: {:temp_user => true, :has_group => true, :group_id => @user.groups.first.id}%>
+     <%= button_to "Add Project", new_project_path, method: :get, params: {:group_id => @user.groups.first.id}%>
      </div>
-     <div class="font20">Your Students</div>
-     <div>
+
+     <div class="flex">
+          <div id="student-display">
+          <div class="font20">Your Group</div>
+          <div>
           
-          <% @students.each do |student|%>
+          <% @group.users.each do |student|%>
           <div class="flex">
+          <div><%= student.temp_user ? "Inactive" : "Active"%></div>
+          &nbsp
           <div><%= student.fname%></div>
           &nbsp
           <div><%= student.lname%></div>
           &nbsp
+          <div><%= student.email%></div>
+          &nbsp
+          <div><% if student.admin%>
+                    Admin
+               <% end %>
+               </div>
+               &nbsp
+
           <div><%= link_to "delete", student, method: :delete %></div>
           </div>
           <% end %>
           
-     </div>
+          </div>
+          </div>
+
+          <div id="project-display" class="left-space-lll">
+               <div class="font20">Your Projects</div>
+               <% @group.projects.each do |project|%>
+                    <div>
+               
+                    <%= project.name%>
+                    <%= project.description%>
+                    <% if !project.has_team%>
+                    <%= button_to "Create  Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
+                    <% else%>
+                    <%= button_to "View  Teams", project_path, method: :get, params: {:project_id => project.id, :user_id => @user.id}%>
+                    <%end%>
+                    </div>
+               <%end%>   
+          </div>
+     </div>    
      
      <%end%>
 </div>

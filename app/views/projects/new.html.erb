@@ -1,0 +1,13 @@
+<%= form_for @project do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, :required =>  true%>
+    <br>
+    <%= f.label :description %>
+    <%= f.text_field :description, :required =>  true%>
+    <br>
+    <div class="none">
+    <%= hidden_field_tag(:group_id, @group_id)%>
+    </div>
+    <%= f.submit "Create Project"%>
+
+<% end %>

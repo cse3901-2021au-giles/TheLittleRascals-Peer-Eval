@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_130914) do
+ActiveRecord::Schema.define(version: 2021_11_29_025156) do
+
+  create_table "groupings", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.integer "size"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "owner"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.integer "group_id"
+    t.string "name"
+    t.string "description"
+    t.boolean "has_team"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "students", force: :cascade do |t|
     t.string "name"
@@ -18,6 +42,22 @@ ActiveRecord::Schema.define(version: 2021_11_26_130914) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password"
+  end
+
+  create_table "teamings", force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "project_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
   end
 
   create_table "users", force: :cascade do |t|

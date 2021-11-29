@@ -1,0 +1,23 @@
+<% if @user.admin %>
+    <%= @project.name%>
+    <%= @project.description%>
+
+    <% @project.teams.each do |team|%>
+        <div class="flex font20 top-space"> 
+        Team <%= team.name%>
+        <%= team.description%>
+        </div>
+        <div class="font20">
+            Team Members
+            <div class="flex">
+            <% team.users.each do |member|%>
+                <div><%= member.fname%></div>
+                &nbsp
+                <div><%= member.lname%></div>
+                &nbsp
+                <div><%= member.email%></div>
+            <%end%>
+            </div>
+        </div>
+    <%end%>   
+<%end%>
