@@ -4,10 +4,10 @@ one:
   group_id: 1
   name: MyString
   description: MyString
-  has_group: false
+  
 
 two:
   group_id: 1
   name: MyString
   description: MyString
-  has_group: false
+  

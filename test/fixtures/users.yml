@@ -4,12 +4,12 @@ one:
   fname: MyString
   lname: MyString
   email: MyString
-  password: MyString
+  password_digest: MyString
   admin: false
 
 two:
   fname: MyString
   lname: MyString
   email: MyString
-  password: MyString
+  password_digest: MyString
   admin: false
