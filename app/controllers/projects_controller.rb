@@ -10,10 +10,10 @@ class ProjectsController < ApplicationController
         @project.has_team = false
         if @project.save
             return redirect_to user_path(session[:current_user]), notice: "New project created successful"
-        else 
+        else
             puts "-------------------------"
             render :new
-        end 
+        end
     end
 
     def show

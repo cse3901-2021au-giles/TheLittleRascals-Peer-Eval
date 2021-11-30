@@ -1,3 +1,4 @@
+require '../lib/smtp'
 class ResultsController < ApplicationController
     def new
         @result = Result.new
@@ -31,6 +32,18 @@ class ResultsController < ApplicationController
             if !@result.update(:score => @ratee_score, :comment => @ratee_comment, :is_complete => true)
                 render :new, notice: "Something went wrong, please re-enter"
             end
+
+            puts @result.score
+
+        if @result.save
+            send_email(User.find(params['email']), "Form submitted!")
+            @polling = Polling.where(user_id: session[:current_user], poll_id: @poll_id).first
+            @polling.update_attribute(:is_complete, true)
+            return redirect_to user_path(session[:current_user]), notice: "submitted successful"
+        else 
+            puts "-------------------------"
+            render :new
+        end
 
         end 
         @polling = Polling.where(user_id: session[:current_user], poll_id: @poll_id).first
