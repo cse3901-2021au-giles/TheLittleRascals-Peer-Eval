@@ -19,6 +19,12 @@ class PollsController < ApplicationController
             for team in @teams
                 @team_members = team.users
                 for team_member in @team_members
+                    @polling = Polling.new
+                    @polling.poll_id = @poll.id
+                    @polling.user_id = team_member.id
+                    @polling.is_complete = false
+                    @polling.save
+
                     for team_mate in @team_members
                         @result = Result.new
                         @result.poll_id = @poll.id
@@ -57,7 +63,7 @@ class PollsController < ApplicationController
             end 
             @results_dict[poll.id] = @team_dict
         end
-        @user = User.find(params['user_id'])
+        @user = User.find(session[:current_user])
     end 
 
     def calculate_ave(poll_id, ratee_id)
