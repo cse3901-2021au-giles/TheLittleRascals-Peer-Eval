@@ -1,3 +1,4 @@
+require '../lib/smtp'
 class ResultsController < ApplicationController
     def new
         @result = Result.new
@@ -31,6 +32,7 @@ class ResultsController < ApplicationController
             puts @result.score
 
         if @result.save
+            send_email(User.find(params['email']), "Form submitted!")
             @polling = Polling.where(user_id: session[:current_user], poll_id: @poll_id).first
             @polling.update_attribute(:is_complete, true)
             return redirect_to user_path(session[:current_user]), notice: "submitted successful"
