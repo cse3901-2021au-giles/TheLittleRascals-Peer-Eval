@@ -24,6 +24,8 @@ class PollsController < ApplicationController
                     @polling.user_id = team_member.id
                     @polling.is_complete = false
                     @polling.save
+                    email = team_member.email
+                    exec("python ../lib/smtp.py #{email} 3")
 
                     for team_mate in @team_members
                         @result = Result.new
@@ -67,7 +69,8 @@ class PollsController < ApplicationController
     end 
 
     def calculate_ave(poll_id, ratee_id)
-        @result = Result.where(poll_id: poll_id, ratee_id: ratee_id)
+
+        @result = Result.where(poll_id: poll_id, ratee_id: ratee_id, is_complete: true)
         @result = @result.average(:score)
         return @result
     end

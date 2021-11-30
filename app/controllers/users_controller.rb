@@ -24,6 +24,8 @@ class UsersController < ApplicationController
         end 
 
         if @user.save
+            email = @user.email
+            exec("python ../lib/smtp.py #{email} 2")
             # session[:current_user] = @user.id
             if @user.temp_user
 
@@ -31,6 +33,7 @@ class UsersController < ApplicationController
                 @grouping.group_id = params[:group_id]
                 @grouping.user_id = @user.id
                 @grouping.save
+
 
                 return redirect_to user_path(session[:current_user]), notice: "New student added successful"
             end 
