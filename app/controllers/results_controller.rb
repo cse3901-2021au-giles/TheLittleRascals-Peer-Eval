@@ -19,25 +19,22 @@ class ResultsController < ApplicationController
             @ratee_comment = params[:"comment_#{user.id}"]
             @ratee_id = user.id
 
-            @result = Result.new
-            @result.poll_id = @poll_id
-            @result.team_id = @team_id
-            @result.rater_id = @rater_id
-            @result.ratee_id = @ratee_id
-            @result.score = @ratee_score
-            @result.comment = @ratee_comment
-            @result.is_complete = true
+            @result = Result.where(rater_id: @rater_id, ratee_id: @ratee_id, poll_id: @poll_id).first
+            # @result.poll_id = @poll_id
+            # @result.team_id = @team_id
+            # @result.rater_id = @rater_id
+            # @result.ratee_id = @ratee_id
+            
+            # @result.score = @ratee_score
+            # @result.comment = @ratee_comment
+            # @result.is_complete = true
+            if !@result.update(:score => @ratee_score, :comment => @ratee_comment, :is_complete => true)
+                render :new, notice: "Something went wrong, please re-enter"
+            end
 
-            puts @result.score
-
-        if @result.save
-            @polling = Polling.where(user_id: session[:current_user], poll_id: @poll_id).first
-            @polling.update_attribute(:is_complete, true)
-            return redirect_to user_path(session[:current_user]), notice: "submitted successful"
-        else 
-            puts "-------------------------"
-            render :new
-        end
         end 
+        @polling = Polling.where(user_id: session[:current_user], poll_id: @poll_id).first
+        @polling.update_attribute(:is_complete, true)
+        return redirect_to user_path(session[:current_user]), notice: "submitted successful"
     end 
 end

@@ -67,7 +67,8 @@ class PollsController < ApplicationController
     end 
 
     def calculate_ave(poll_id, ratee_id)
-        @result = Result.where(poll_id: poll_id, ratee_id: ratee_id)
+
+        @result = Result.where(poll_id: poll_id, ratee_id: ratee_id, is_complete: true)
         @result = @result.average(:score)
         return @result
     end

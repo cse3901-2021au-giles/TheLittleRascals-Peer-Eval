@@ -18,8 +18,8 @@ class TeamsController < ApplicationController
         @team_splits.length.times do |i|
             @team_members = @team_splits[i]
             @team = Team.new(team_params)
-            @team.name = "Team name"
-            @team.description = "Team description"
+            @team.name = LiterateRandomizer.word
+            @team.description = "Random description for the team"
             @team.group_id = @group_id
             @team.project_id = @project_id
             if @team.save
