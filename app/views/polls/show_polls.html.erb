@@ -2,7 +2,11 @@
     <%= @project.name%>
     <%= @project.description%>
 
+    <div class="flex">
+    <div>
+    <h1>Open</h1>
     <% @project.polls.each do |poll|%>
+        <%if poll.end_date > Date.today %>
         <div class="flex font20 top-space"> 
         <%= poll.description%>
         <%= poll.created_at%>
@@ -24,7 +28,38 @@
             </div>
         <%end%>
         </div>
-    <%end%>   
+        <%end%>
+    <%end%>
+    </div>
+    <div>
+    <h1>Closed</h1>
+        <% @project.polls.each do |poll|%>
+        <%if poll.end_date < Date.today %>
+        <div class="flex font20 top-space"> 
+        <%= poll.description%>
+        <%= poll.created_at%>
+        <%= poll.end_date%>
+        </div>
+        <div class="flex">
+        <% @results_dict[poll.id].each do |team|%>
+            <div>
+                <%= @project.teams.find(team[0]).name%>
+                <% team[1].each do |user|%>
+                <div class="flex">
+                <tr><%= @group.users.find(user[0]).fname %></tr>
+                &nbsp
+                <div><%= @group.users.find(user[0]).lname %></div>
+                &nbsp
+                <div><%= user[1] %></div>
+                </div>
+                <%end %>
+            </div>
+        <%end%>
+        </div>
+        <%end%>
+    <%end%>
+    </div>
+</div>
 <%else%>
 <h1>Permission denied, you do not have the permission to view this page.</h1>
 <%end%>
