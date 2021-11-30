@@ -2,7 +2,7 @@ class TeamsController < ApplicationController
     def new 
         @group_id = params[:group_id]
         @project_id = params[:project_id]
-        @user = User.find(params[:user_id])
+        @user = User.find(session[:current_user])
         @team = Team.new
     end
 
@@ -11,15 +11,15 @@ class TeamsController < ApplicationController
         @project_id = params[:project_id]
         @team_size = params[:team_size]
         @group = Group.find(@group_id)
-        @users = @group.users.ids
+        @users = @group.users.where.not(admin: true).ids
         @users = @users.shuffle
         @team_splits = @users.each_slice(@team_size.to_i).to_a
 
         @team_splits.length.times do |i|
             @team_members = @team_splits[i]
             @team = Team.new(team_params)
-            @team.name = (0...50).map{('a'..'z').to_a[rand(26)]}.join
-            @team.description = (0...50).map{('a'..'z').to_a[rand(26)]}.join
+            @team.name = LiterateRandomizer.word
+            @team.description = "Random description for the team"
             @team.group_id = @group_id
             @team.project_id = @project_id
             if @team.save

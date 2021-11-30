@@ -19,6 +19,7 @@
                <% else %>
                     <div> Your groups are: </div>
                     <% @user.groups.each do |group| %>
+                     <div><%= group.id%></div>
                     <div><%= group.name%></div>
                     <% end %>
                <% end %>
@@ -96,6 +97,7 @@
           </tr>
 
      </table>
-
      <%end%>
+
+
 </div>
