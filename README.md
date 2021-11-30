@@ -22,3 +22,4 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+* PLEASE BE SURE TO ADD PYTHON TO YOUR COMPUTER AND TO YOUR PATH!
