@@ -32,117 +32,71 @@
      <%= button_to "Add Project", new_project_path, method: :get, params: {:group_id => @user.groups.first.id}%>
      </div>
 
-     <div class="flex">
-          <div id="student-display">
-          <div class="font20">Your Class</div>
-          <div>
-          
-          <% @group.users.each do |student|%>
-          <div class="flex">
-          <div><%= student.temp_user ? "Inactive" : "Active"%></div>
-          &nbsp
-          <div><%= student.fname%></div>
-          &nbsp
-          <div><%= student.lname%></div>
-          &nbsp
-          <div><%= student.email%></div>
-          &nbsp
-          <div><% if student.admin%>
-                    Admin
-               <% end %>
-               </div>
-               &nbsp
 
-          <div><%= link_to "delete", student, method: :delete %></div>
-          </div>
-          <% end %>
-          
-          </div>
-          </div>
+     <table>
 
-          <div id="project-display" class="left-space-lll">
-               <div class="font20">Your Projects</div>
-               <% @group.projects.each do |project|%>
-                    <div>
-               
-                    <%= project.name%>
-                    <%= project.description%>
-                    <%= link_to "delete", project, method: :delete %>
-                    <div class="flex">
-                    <% if !project.has_team%>
-                    <%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
-                    <% else%>
-                    <%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}%>
-                    <%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
-                    <%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
-                    <%end%>
-                    
-                    </div>
-                    </div>
-               <%end%>   
-          </div>
-     </div>    
-     <%else%>
-          <div>
-          <h1>Opening Polls</h1>
-               <%@user.polls.each do |poll|%>
-               <%if poll.end_date > Date.today %>
-               <div class="flex">
+          <tr>
+               <th class="font20 table-border">Your Class</th>
+               <th class="font20 table-border">Your Projects</th>
+          </tr>
 
-               <div><%=@user.groups.find(poll.group_id).name%></div>
-               &nbsp
-               <div><%=@user.groups.find(poll.group_id).projects.find(poll.project_id).name%></div>
-               &nbsp
-               <div><%=@user.teams.where(project_id: poll.project_id).first.name%></div>
-               &nbsp
-               <div><%= poll.description%></div>
-               &nbsp
-               <div><%= poll.end_date %></div>
-               &nbsp
-               <%if @user.pollings.where(poll_id: poll.id).first.is_complete%>
-               <div> You are alread completed this poll </div>
-               <%else%>
-               <%= button_to "Complete Activity", new_result_path, method: :get, params: {:project_id => poll.project_id, :team_id => @user.teams.where(project_id: poll.project_id).first.id, :poll_id => poll.id}%>
-               <%end%>
-               </div>
-               <%end %>
-               <%end%>
-          </div>
+          <tr>
+               <td class="table-border">  
+                    <% @group.users.each do |student|%>
+                         <table>
+                              <td>
+                                   <div><%= student.temp_user ? "Inactive" : "Active"%></div>
+                              </td>
+                              <td>
+                                   <div><%= student.fname%></div>
+                              </td>
+                              <td>
+                                   <div><%= student.lname%></div>
+                              </td>
+                              <td>
+                                   <div><%= student.email%></div>
+                              </td>
+                              <td>
+                                   <div>
+                                        <% if student.admin%>
+                                             Admin
+                                        <% end %>
+                                   </div>
+                              </td>
+                              <td>
+                                   <div><%= link_to "delete", student, method: :delete %></div>
+                              </td>
+                         </table>
+                    <% end %>
+               </td>
 
-          <h1>Closed Polls</h1>
-               <%@user.polls.each do |poll|%>
-               <%if poll.end_date < Date.today %>
-               <div class="flex">
-               <div><%=@user.groups.find(poll.group_id).name%></div>
-               &nbsp
-               <div><%=@user.groups.find(poll.group_id).projects.find(poll.project_id).name%></div>
-               &nbsp
-               <div><%= poll.description%></div>
-               &nbsp
-               <div><%= poll.end_date %></div>
-               
-               </div>
-               <%end %>
-               <%end%>
-          </div>
+               <td class="table-border">
+                    <% @group.projects.each do |project|%>
+                         <table>
+                              <td>
+                                   <%= project.name%>
+                              </td>
+                              <td>
+                                   <%= project.description%>
+                              </td>
+                              <td>
+                                   <%= link_to "delete", project, method: :delete %>
+                              </td>
+                              <td>
+                                   <% if !project.has_team%>
+                                        <%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
+                                        <% else%>
+                                        <%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}%>
+                                        <%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
+                                        <%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
+                                   <%end%>
+                              </td>
+                         </table>
+                    <% end %>
+               </td>
+          </tr>
 
-          <div>
-          <h1>Your Teams</h1>
-         <%@user.teams.each do |team|%>
-               <div><%= team.name %></div>
-               <div><%= @user.groups.find(team.group_id).name %></div>
-               <div><%= Project.joins(:teams).where(teams: {id: team.id}).first.name %></div>
-               <div>
-                    <% team.users.each do |user|%>
-                    <div class="flex">
-                    <div><%=user.fname%></div>
-                    &nbsp
-                    <div><%=user.lname%></div>
-                    </div>
-                    <%end%>
-               </div>
-         <%end%>
-         <div>
+     </table>
      <%end%>
 
 
