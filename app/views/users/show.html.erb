@@ -35,12 +35,12 @@
      <table>
 
           <tr>
-               <th class="font20">Your Class</th>
-               <th class="font20">Your Projects</th>
+               <th class="font20 table-border">Your Class</th>
+               <th class="font20 table-border">Your Projects</th>
           </tr>
 
           <tr>
-               <td>  
+               <td class="table-border">  
                     <% @group.users.each do |student|%>
                          <table>
                               <td>
@@ -69,7 +69,7 @@
                     <% end %>
                </td>
 
-               <td>
+               <td class="table-border">
                     <% @group.projects.each do |project|%>
                          <table>
                               <td>
@@ -96,6 +96,6 @@
           </tr>
 
      </table>
-     
+
      <%end%>
 </div>
