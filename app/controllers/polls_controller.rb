@@ -16,18 +16,18 @@ class PollsController < ApplicationController
         if @poll.save
             @project = Project.find(params[:project_id])
             @teams = @project.teams
-            for team in @teams
+            @teams.each do |team|
                 @team_members = team.users
-                for team_member in @team_members
+                @team_members.each do |team_member|
                     @polling = Polling.new
                     @polling.poll_id = @poll.id
                     @polling.user_id = team_member.id
                     @polling.is_complete = false
                     @polling.save
                     email = team_member.email
-                    exec("python ../lib/smtp.py #{email} 3")
+                    exec(" python3 smtp.py \"#{email}\" \"3\"")
 
-                    for team_mate in @team_members
+                    @team_members.each do |team_mate|
                         @result = Result.new
                         @result.poll_id = @poll.id
                         @result.rater_id = team_member.id
@@ -53,11 +53,11 @@ class PollsController < ApplicationController
         @polls = @project.polls
         @group = Group.find(params['group_id'])
         @results_dict = Hash.new
-        for poll in @polls
+        @polls.each do |poll|
             @team_dict = Hash.new
-            for team in @teams 
+            @teams.each do |team| 
                 @user_dict = Hash.new
-                for user in team.users
+                team.users.each do |user|
                     @ave = calculate_ave(poll.id, user.id)
                     @user_dict[user.id] = @ave
                 end 

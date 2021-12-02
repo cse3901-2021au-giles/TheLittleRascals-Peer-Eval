@@ -32,6 +32,13 @@ try:
         message_text = "A new poll assignment was created at %s\n\n-Littlerascals" % date
         message = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (fromEmail, to, subject,
                                                                      date, message_text)
+    elif int(msg_type) == 4:
+        student_name = sys.argv[3]
+        subject = "Student's score below threshold"
+        date = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
+        message_text = "Student %s has a score that is below the expected threshold\n\n-Littlerascals" % student_name
+        message = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (fromEmail, to, subject,
+                                                                     date, message_text)
 
     server.sendmail(fromEmail, to, message)
     server.quit()
