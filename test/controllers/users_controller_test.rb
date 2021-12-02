@@ -5,6 +5,8 @@ class UsersControllerTest < ActionController::TestCase
   #   assert true
   # end
 
+  @user = users{:one}
+
   test "should get new" do
     get :new
     assert_response :success

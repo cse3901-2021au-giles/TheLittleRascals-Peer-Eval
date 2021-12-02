@@ -12,7 +12,8 @@ class UsersController < ApplicationController
     
     def create 
         @user = User.new(user_params) 
-        
+        @user.save
+        @user.errors
         if user_params['admin'] == 1
             @user.admin = true
         end 
