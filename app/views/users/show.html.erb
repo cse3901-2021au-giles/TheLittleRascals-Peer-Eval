@@ -39,9 +39,9 @@
           
           <% @group.users.each do |student|%>
           <div class="flex">
-          <div><%= student.temp_user ? "Inactive" : "Active"%></div>
+          <tr><%= student.temp_user ? "Inactive" : "Active"%></tr>
           &nbsp
-          <div><%= student.fname%></div>
+          <tr><%= student.fname%></tr>
           &nbsp
           <div><%= student.lname%></div>
           &nbsp
