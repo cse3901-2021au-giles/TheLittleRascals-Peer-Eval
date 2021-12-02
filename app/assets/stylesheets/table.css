@@ -16,3 +16,15 @@ td, th {
 tr:nth-child(even) {
     background-color: antiquewhite;
 }
+
+.table-half {
+    max-width: 50%;
+    flex: 1 auto;
+}
+
+.table-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
