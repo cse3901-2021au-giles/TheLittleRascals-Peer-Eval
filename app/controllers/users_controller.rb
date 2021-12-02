@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
         if @user.save
             email = @user.email
-            exec("python ../lib/smtp.py #{email} 2")
+            exec("python3 ../lib/smtp.py #{email} 2")
             # session[:current_user] = @user.id
             if @user.temp_user
 
