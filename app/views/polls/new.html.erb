@@ -3,7 +3,7 @@
     <%= f.text_field :description, :required =>  true%>
     <br>
     <%= label_tag :end_date_from_now%>
-    <%= text_field_tag 'time', value = nil, :required => true%>
+    <%= f.select :time, options_for_select(1..15), value = nil, :required => true%>
     <br>
     <div class="none">
     <%= hidden_field_tag(:group_id, @group_id)%>
