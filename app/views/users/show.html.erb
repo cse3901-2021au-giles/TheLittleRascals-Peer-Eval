@@ -33,70 +33,70 @@
      </div>
 
 
-     <table>
+     <div class="table-wrapper">
+          <table class="table-half table-border">
+               <tr>
+                    <th class="font20">Your Class</th>
+               </tr>
+               <% @group.users.each do |student|%>
+                    <tr class="table-border">  
+                    
+                         <td>
+                              <div><%= student.temp_user ? "Inactive" : "Active"%></div>
+                         </td>
+                         <td>
+                              <div><%= student.fname%></div>
+                         </td>
+                         <td>
+                              <div><%= student.lname%></div>
+                         </td>
+                         <td>
+                              <div><%= student.email%></div>
+                         </td>
+                         <td>
+                              <div>
+                                   <% if student.admin%>
+                                        Admin
+                                   <% end %>
+                              </div>
+                         </td>
+                         <td>
+                              <div><%= link_to "delete", student, method: :delete %></div>
+                         </td>
+                    </tr>
+               <% end %>
+          </table>
 
-          <tr>
-               <th class="font20 table-border">Your Class</th>
-               <th class="font20 table-border">Your Projects</th>
-          </tr>
+          <table class="table-half table-border">
+               <tr>
+                    <th class="font20">Your Projects</th>
+               </tr>
+               <% @group.projects.each do |project|%>
+                    <tr class="table-border">  
+                    
+                         <td>
+                              <%= project.name%>
+                         </td>
+                         <td>
+                              <%= project.description%>
+                         </td>
+                         <td>
+                              <%= link_to "delete", project, method: :delete %>
+                         </td>
+                         <td>
+                              <% if !project.has_team%>
+                                   <%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
+                                   <% else%>
+                                   <%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}%>
+                                   <%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
+                                   <%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
+                              <%end%>
+                         </td>
+                    </tr>
+               <% end %>
+          </table>
+     </div>
 
-          <tr>
-               <td class="table-border">  
-                    <% @group.users.each do |student|%>
-                         <table>
-                              <td>
-                                   <div><%= student.temp_user ? "Inactive" : "Active"%></div>
-                              </td>
-                              <td>
-                                   <div><%= student.fname%></div>
-                              </td>
-                              <td>
-                                   <div><%= student.lname%></div>
-                              </td>
-                              <td>
-                                   <div><%= student.email%></div>
-                              </td>
-                              <td>
-                                   <div>
-                                        <% if student.admin%>
-                                             Admin
-                                        <% end %>
-                                   </div>
-                              </td>
-                              <td>
-                                   <div><%= link_to "delete", student, method: :delete %></div>
-                              </td>
-                         </table>
-                    <% end %>
-               </td>
-
-               <td class="table-border">
-                    <% @group.projects.each do |project|%>
-                         <table>
-                              <td>
-                                   <%= project.name%>
-                              </td>
-                              <td>
-                                   <%= project.description%>
-                              </td>
-                              <td>
-                                   <%= link_to "delete", project, method: :delete %>
-                              </td>
-                              <td>
-                                   <% if !project.has_team%>
-                                        <%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
-                                        <% else%>
-                                        <%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}%>
-                                        <%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
-                                        <%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
-                                   <%end%>
-                              </td>
-                         </table>
-                    <% end %>
-               </td>
-          </tr>
-
-     </table>
      <%end%>
 
 
