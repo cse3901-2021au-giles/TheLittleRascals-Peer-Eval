@@ -37,7 +37,7 @@ class ResultsController < ApplicationController
 
         if @result.save
             email = User.find(session[:current_user]).email
-            exec(" python3 smtp.py \"#{email}\" \"1\"")
+            puts `\npython3 smtp.py #{email} "1"`
             @polling = Polling.where(user_id: session[:current_user], poll_id: @poll_id).first
             @polling.update_attribute(:is_complete, true)
             return redirect_to user_path(session[:current_user]), notice: "submitted successful"
