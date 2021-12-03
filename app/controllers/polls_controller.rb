@@ -25,7 +25,7 @@ class PollsController < ApplicationController
                     @polling.is_complete = false
                     @polling.save
                     email = team_member.email
-                    exec(" python3 smtp.py \"#{email}\" \"3\"")
+                    puts `\npython3 smtp.py #{email} "3"`
 
                     @team_members.each do |team_mate|
                         @result = Result.new

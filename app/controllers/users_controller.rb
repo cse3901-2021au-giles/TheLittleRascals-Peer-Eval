@@ -25,7 +25,9 @@ class UsersController < ApplicationController
 
         if @user.save
             email = @user.email
-            exec("python3 ../lib/smtp.py #{email} 2")
+            puts `\npython3 smtp.py #{email} "2"`
+            # fork{exec("python3 smtp.py \"#{email}\" \"1\"")}
+            # Kernel.exec("python3 smtp.py #{email} 2")
             # session[:current_user] = @user.id
             if @user.temp_user
 
