@@ -6,15 +6,15 @@ class PasswordController < ApplicationController
   def send_email
     @email = params[:email]
     if User.exists?(email: @email)
-      password = ""
+      new_password = ""
       for a in 1..9 do
-        password += (rand(90) + 33).chr
+        new_password += (rand(90) + 33).chr
       end
       @user = User.find_by(email: params[:email])
-      @user.password = password.delete(' ')
-      # @user.save
+      new_password = new_password.delete(' ')
+      @user.update_attribute(:password, new_password)
       message = "Email sent!"
-    puts `\npython3 smtp.py #{@email} "5" "#{password}"`
+    puts `\npython3 smtp.py #{@email} "5" "#{new_password}"`
     else
       message = "Email does not exist! Please create an account"
     end
