@@ -11,7 +11,19 @@ class UsersController < ApplicationController
     end 
     
     def create 
-        @user = User.new(user_params) 
+        @user = User.new(user_params)
+
+        # alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        # sym = "~`!@#$%^&*()_+-={[}]|\\:;"'<,>.?/'"`"
+        # num = "1234567890"
+        # password = params[:password]
+        # puts("\n\n#{password}\n\n")
+        # @bad_password = false
+        # @error = "Password must contain an uppercase letter, a symbol and a number!!!"
+        # if password.count(/#{alpha}/) < 1 or
+        #   password.count(/[#{sym}]/) < 1 or word.count(/[#{num}]/) <1
+        #     @bad_password = true
+        # end
         
         if user_params['admin'] == 1
             @user.admin = true

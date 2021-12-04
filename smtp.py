@@ -41,6 +41,14 @@ try:
         message = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (fromEmail, to, subject,
                                                                      date, message_text)
 
+    elif int(msg_type) == 5:
+            temp_password = sys.argv[3]
+            subject = "Password Has Been Reset"
+            date = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
+            message_text = "Your password has been temporarily changed to: %s\n\n-Littlerascals" % temp_password
+            message = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (fromEmail, to, subject,
+                                                                         date, message_text)
+
     server.sendmail(fromEmail, to, message)
     server.quit()
 except:

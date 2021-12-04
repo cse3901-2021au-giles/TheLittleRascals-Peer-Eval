@@ -1,0 +1,8 @@
+<div>
+  <h2>Reset Password</h2>
+  <p class="notice"><%= notice %> </p>
+  <%= form_tag '/emailpassword' do %>
+    Email: <%= text_field_tag :email%><br>
+    <%= submit_tag "Enter"%>
+  <%end%>
+</div>
