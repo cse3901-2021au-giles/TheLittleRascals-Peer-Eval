@@ -17,9 +17,10 @@ class SessionsController < ApplicationController
             redirect_to user_path(session[:current_user]),  notice: "You are logged in as student"
         else
             message = "Something is wrong"
-            if exists
-                message = "Email already in use. Please log in"
+            if exists && !@user.authenticate(params[:password])
+                message = "Wrong password!"
             end
+
             redirect_to login_path, notice: message
         end
 

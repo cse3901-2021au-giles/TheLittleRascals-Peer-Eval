@@ -8,10 +8,16 @@ class UsersController < ApplicationController
     
     def index
         @user = User.all
-    end 
+    end
+
+
     
     def create 
         @user = User.new(user_params)
+        exists_error = "This email is already in use! Please sign in."
+        if User.exists?(email: @user.email)
+            return redirect_to login_path, notice: exists_error
+        end
 
         # alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         # sym = "~`!@#$%^&*()_+-={[}]|\\:;"'<,>.?/'"`"
