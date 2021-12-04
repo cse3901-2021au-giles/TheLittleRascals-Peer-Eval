@@ -14,7 +14,9 @@
  *= require_self
  */
 
-.notice {
+@import "bootstrap/scss/bootstrap";
+
+ .notice {
     color: red
 }
 

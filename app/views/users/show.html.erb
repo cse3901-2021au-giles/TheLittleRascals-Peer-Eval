@@ -1,36 +1,44 @@
 <%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
 <div>
      <p class="notice"><%= notice %> </p>
-     
-     <div class="info-area header  ">
-          <div>You are logged in as</div>
-          <div class="flex"><%= @user.fname%>
-          <%= @user.lname%>
-          <%= @user.email%>
-          <%= button_to "Logout", logout_path, method: :post%>
-          <%= button_to "Update Profile", edit_user_path, method: :get%>
-          </div>
-          <div class="flex">
-               <% if @user.admin%>
-                    <div> Your Manage Group # </div>
-                    <%= @user.groups.first.id%>
-                    <%= @user.groups.first.name%>
 
-               <% else %>
-                    <div> Your groups are: </div>
-                    <% @user.groups.each do |group| %>
-                     <div><%= group.id%></div>
-                    <div><%= group.name%></div>
+     <nav class="navbar navbar-expand-lg navbar-light">
+
+     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+               <li class="nav-item">
+                    <%= "Welcome " + @user.fname + " " + @user.lname + "!"%>
+               </li>
+               <li class="nav-item">
+                    <%= "Your email: " + @user.email%>
+               </li>
+               <li class="nav-item">
+                    <% if @user.admin%>
+                         <%= "You manage group number " + @user.groups.first.id.to_s + ": " + @user.groups.first.name%>
+
+                    <% else %>
+                         <%= "Your groups are "%>
+                         <% @user.groups.each do |group| %>
+                         <%= "ID: " + group.id.to_s%>
+                         <%= "Name: " + group.name%>
+                         <% end %>
                     <% end %>
-               <% end %>
+               </li>
+          </ul>
+          </div class="my-2 my-lg-0">
+               <%= button_to "Logout", logout_path, method: :post, class: "btn btn-danger"%>
+               <%= button_to "Update Profile", edit_user_path, method: :get, class: "btn btn-info"%>
           </div>
-     </div>
+          
+     </nav>
      
+     <br />
      <% if @user.admin %>
-     <div class="top-space flex">
-     <%= button_to "Add Student", new_user_path, method: :get, params: {:temp_user => true, :has_group => true, :group_id => @user.groups.first.id}%>
-     <%= button_to "Add Project", new_project_path, method: :get, params: {:group_id => @user.groups.first.id}%>
+     <div class="flex">
+     <%= button_to "Add Student", new_user_path, method: :get, params: {:temp_user => true, :has_group => true, :group_id => @user.groups.first.id}, class: "btn btn-success"%>
+     <%= button_to "Add Project", new_project_path, method: :get, params: {:group_id => @user.groups.first.id}, class: "btn btn-success"%>
      </div>
+     <br />
 
 
      <div class="table-wrapper">
@@ -61,7 +69,7 @@
                               </div>
                          </td>
                          <td>
-                              <div><%= link_to "delete", student, method: :delete %></div>
+                              <div><%= link_to "Delete", student, method: :delete, class: "btn btn-danger"%></div>
                          </td>
                     </tr>
                <% end %>
@@ -81,17 +89,17 @@
                               <%= project.description%>
                          </td>
                          <td>
-                              <%= link_to "delete", project, method: :delete %>
+                              <%= button_to "Delete", project, method: :delete, class: "btn btn-danger"%>
                          </td>
-                         <td>
-                              <% if !project.has_team%>
-                                   <%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
-                                   <% else%>
-                                   <%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}%>
-                                   <%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
-                                   <%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
-                              <%end%>
-                         </td>
+                         <% if !project.has_team%>
+                              <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-success"%></td>
+                              <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-success invisible"%></td>
+                              <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-success invisible"%></td>
+                              <% else%>
+                              <td><%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}, class: "btn btn-primary"%></td>
+                              <td><%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-primary"%></td>
+                              <td><%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-primary"%></td>
+                         <%end%>
                     </tr>
                <% end %>
           </table>
