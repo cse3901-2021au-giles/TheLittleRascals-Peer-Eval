@@ -83,15 +83,13 @@
                          <td>
                               <%= link_to "delete", project, method: :delete %>
                          </td>
-                         <td>
-                              <% if !project.has_team%>
-                                   <%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
-                                   <% else%>
-                                   <%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}%>
-                                   <%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
-                                   <%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%>
-                              <%end%>
-                         </td>
+                         <% if !project.has_team%>
+                              <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%></td>
+                              <% else%>
+                              <td><%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}%></td>
+                              <td><%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%></td>
+                              <td><%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}%></td>
+                         <%end%>
                     </tr>
                <% end %>
           </table>
