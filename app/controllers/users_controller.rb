@@ -19,6 +19,7 @@ class UsersController < ApplicationController
             return redirect_to login_path, notice: exists_error
         end
 
+
         alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         sym = "~`!@#$%^&*()_+-={[}]|\\:;"'<,>.?/'"`"
         num = "1234567890"
