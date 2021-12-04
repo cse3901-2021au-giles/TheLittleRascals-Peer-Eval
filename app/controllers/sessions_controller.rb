@@ -19,6 +19,8 @@ class SessionsController < ApplicationController
             message = "Something is wrong"
             if exists && !@user.authenticate(params[:password])
                 message = "Wrong password!"
+            elsif !exists
+                message = "Email not in use!"
             end
 
             redirect_to login_path, notice: message
