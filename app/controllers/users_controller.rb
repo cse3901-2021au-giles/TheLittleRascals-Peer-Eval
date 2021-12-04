@@ -19,8 +19,8 @@ class UsersController < ApplicationController
         # password = params[:password]
         # puts("\n\n#{password}\n\n")
         # @bad_password = false
-        # @error = "Password must contain an uppercase letter, a symbol and a number!!!"
-        # if password.count(/#{alpha}/) < 1 or
+        # @error = "Password must contain an uppercase letter, a symbol, a number and be 8 in length!!!"
+        # if password.count(/#{alpha}/) < 1 or password.length < 8 or
         #   password.count(/[#{sym}]/) < 1 or word.count(/[#{num}]/) <1
         #     @bad_password = true
         # end
