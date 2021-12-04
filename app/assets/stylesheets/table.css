@@ -32,3 +32,11 @@ tr:nth-child(even) {
     align-items: flex-start;
     flex-wrap: wrap;
 }
+
+nav > *, nav div li {
+    margin: 0 30px;
+}
+
+nav {
+    background-color: antiquewhite;
+}
