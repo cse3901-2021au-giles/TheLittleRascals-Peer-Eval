@@ -2,11 +2,14 @@ Rails.application.routes.draw do
   resources :results
   resources :polls
   resources :teams
+  resources :password, only: [:reset]
   resources :users, only: [:new, :create, :edit, :update, :show, :destroy]
+   get '/password', to: 'password#reset'
+   post 'emailpassword', to: 'password#send_email'
    get '/login', to: 'sessions#login'
    post '/login', to: 'sessions#create'
    post '/logout', to: 'sessions#destroy'
-   get '/logout', to: 'sessions#destroy' 
+   get '/logout', to: 'sessions#destroy'
    match '/users/*all/edit', to: 'users#update', via: :post
   resources :students
   resources :projects
