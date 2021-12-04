@@ -14,7 +14,8 @@ class PasswordController < ApplicationController
       new_password = new_password.delete(' ')
       @user.update_attribute(:password, new_password)
       message = "Email sent!"
-    puts `\npython3 smtp.py #{@email} "5" "#{new_password}"`
+      puts "\n"
+      puts `python3 smtp.py #{@email} "5" "#{new_password}"`
     else
       message = "Email does not exist! Please create an account"
     end
