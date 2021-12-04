@@ -19,17 +19,16 @@ class UsersController < ApplicationController
             return redirect_to login_path, notice: exists_error
         end
 
-        # alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        # sym = "~`!@#$%^&*()_+-={[}]|\\:;"'<,>.?/'"`"
-        # num = "1234567890"
-        # password = params[:password]
-        # puts("\n\n#{password}\n\n")
-        # @bad_password = false
-        # @error = "Password must contain an uppercase letter, a symbol, a number and be 8 in length!!!"
-        # if password.count(/#{alpha}/) < 1 or password.length < 8 or
-        #   password.count(/[#{sym}]/) < 1 or word.count(/[#{num}]/) <1
-        #     @bad_password = true
-        # end
+
+        alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        sym = "~`!@#$%^&*()_+-={[}]|\\:;"'<,>.?/'"`"
+        num = "1234567890"
+        password = @user.password.to_s
+        @error = "Password must contain an uppercase letter, a symbol, a number and be 8 in length!!!"
+        if password.count(alpha) < 1 or password.length < 8 or
+          password.count(sym) < 1 or password.count(num) < 1
+            return render :new
+        end
         
         if user_params['admin'] == 1
             @user.admin = true

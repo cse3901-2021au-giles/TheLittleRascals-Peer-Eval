@@ -15,27 +15,27 @@ try:
     msg_type = sys.argv[2]
     print("\n\nSMTP--Sending to: ",to, " ", msg_type,"\n\n")
     if int(msg_type) == 1:
-        subject = "Form successfully submitted"
+        subject = "Form Successfully Submitted"
         date = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
         message_text = "Congrats!\nYou submitted a form at %s\n\n-Littlerascals :)" % date
         message = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (fromEmail, to, subject,
                                                                      date, message_text)
     elif int(msg_type) == 2:
-        subject = "You have successfully created an account"
+        subject = "You Have Successfully Created an Account"
         date = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
         message_text = "Account created at %s for email: %s \n\n-Littlerascals :)" % (date, to)
         message = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (fromEmail, to, subject,
                                                                      date, message_text)
     elif int(msg_type) == 3:
         print("ENTEREED\n\n\n", to)
-        subject = "You have been assigned a new poll"
+        subject = "You Have Been Assigned a New Poll"
         date = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
         message_text = "A new poll assignment was created at %s\n\n-Littlerascals" % date
         message = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (fromEmail, to, subject,
                                                                      date, message_text)
     elif int(msg_type) == 4:
         student_name = sys.argv[3]
-        subject = "Student's score below threshold"
+        subject = "Student's Score Below Threshold"
         date = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
         message_text = "Student %s has a score that is below the expected threshold\n\n-Littlerascals" % student_name
         message = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (fromEmail, to, subject,
