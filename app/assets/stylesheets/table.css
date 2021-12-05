@@ -9,10 +9,34 @@ td, th {
     padding: 8px;
 }
 
+.right-border {
+    border-right: 1px solid rgb(141, 141, 141);
+}
+
 .table-border {
     border: 1px solid rgb(141, 141, 141);
 }
   
 tr:nth-child(even) {
+    background-color: antiquewhite;
+}
+
+.table-half {
+    max-width: 50%;
+    flex: 1 auto;
+}
+
+.table-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+nav > *, nav div li {
+    margin: 0 30px;
+}
+
+nav {
     background-color: antiquewhite;
 }

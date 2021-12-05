@@ -21,5 +21,7 @@ Things you may want to cover:
 
 * Deployment instructions
 
+* Be sure to download python3 and add it to your global path, otherwise smtp will not work. 
+
 * ...
-* PLEASE BE SURE TO ADD PYTHON TO YOUR COMPUTER AND TO YOUR PATH!
+

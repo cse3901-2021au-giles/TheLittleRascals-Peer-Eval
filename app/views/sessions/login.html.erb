@@ -7,4 +7,5 @@
         <%= submit_tag "Log In"%>
     <%end%>
     <%= button_to "Sign up", new_user_path, method: :get%>
+    <%= button_to "Forgot Password", password_path(@user), method: :get%>
 </div>

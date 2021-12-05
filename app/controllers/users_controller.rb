@@ -8,12 +8,28 @@ class UsersController < ApplicationController
     
     def index
         @user = User.all
-    end 
+    end
+
+
     
     def create 
-        @user = User.new(user_params) 
-        @user.save
-        @user.errors
+        @user = User.new(user_params)
+        exists_error = "This email is already in use! Please sign in."
+        if User.exists?(email: @user.email)
+            return redirect_to login_path, notice: exists_error
+        end
+
+
+        alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        sym = "~`!@#$%^&*()_+-={[}]|\\:;"'<,>.?/'"`"
+        num = "1234567890"
+        password = @user.password.to_s
+        @error = "Password must contain an uppercase letter, a symbol, a number and be 8 in length!!!"
+        if password.count(alpha) < 1 or password.length < 8 or
+          password.count(sym) < 1 or password.count(num) < 1
+            return render :new
+        end
+        
         if user_params['admin'] == 1
             @user.admin = true
         end 
@@ -26,7 +42,9 @@ class UsersController < ApplicationController
 
         if @user.save
             email = @user.email
-            exec("python3 ../lib/smtp.py #{email} 2")
+            puts `\npython3 smtp.py #{email} "2"`
+            # fork{exec("python3 smtp.py \"#{email}\" \"1\"")}
+            # Kernel.exec("python3 smtp.py #{email} 2")
             # session[:current_user] = @user.id
             if @user.temp_user
 

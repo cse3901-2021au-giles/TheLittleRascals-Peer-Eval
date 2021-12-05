@@ -27,6 +27,8 @@
 
 <% else%>
 <h1> New Users Page</h1>
+
+<p class="notice"><%= @error %> </p>
 <%= form_for @user do |f| %>
     <%= f.label :fname %>
     <%= f.text_field :fname, :required =>  true%>
