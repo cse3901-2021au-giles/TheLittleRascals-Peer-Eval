@@ -5,7 +5,11 @@ class PollsControllerTest < ActionController::TestCase
   #   assert true
   # end
 
+  setup do
+
+    @project_id = polls(:one) 
   
+  end
   
   
 
@@ -20,7 +24,12 @@ class PollsControllerTest < ActionController::TestCase
   #   assert_response :success
   # end
 
+  
 
+  test "should get show_polls" do
+    get :show_polls, params:{id: @project_id}
+    assert_response :success
+  end
 
 
 

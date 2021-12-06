@@ -5,11 +5,35 @@ class UsersControllerTest < ActionController::TestCase
   #   assert true
   # end
 
+  setup do
+    @user = users{:one}
+  end
+  
+
   test "should get new" do
     get :new
     assert_response :success
   end
 
 
+  # test "should get index" do
+  #   get :index
+  #   assert_response :success
+  # end
+
+  # test "should get create" do
+  #   get :create, params: {id: @user}
+  #   assert_response :success
+  # end
+
+  test "should get edit" do
+    get :edit
+    assert_response :success
+  end
+
+  test "should get update" do
+    get :update
+    assert_response :success
+  end
 
 end

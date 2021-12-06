@@ -9,5 +9,12 @@ class ResultsControllerTest < ActionController::TestCase
     get :new
     assert_response :success
   end
+
+
+  # test "should get create" do
+  #   @post = results(:one)
+  #   get :create, params: {id: @post}
+  #   assert_response :success
+  # end
   
 end
