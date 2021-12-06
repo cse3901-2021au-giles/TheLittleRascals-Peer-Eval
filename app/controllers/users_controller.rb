@@ -15,9 +15,13 @@ class UsersController < ApplicationController
     def create 
         @user = User.new(user_params)
         exists_error = "This email is already in use! Please sign in."
-        if User.exists?(email: @user.email)
+        exists_error_at_create = "This student is already created."
+        if User.exists?(email: @user.email) && session[:current_user]
+            return redirect_to user_path(session[:current_user]), notice: exists_error_at_create
+        elsif User.exists?(email: @user.email)
             return redirect_to login_path, notice: exists_error
-        end
+        end 
+        
 
 
         alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
