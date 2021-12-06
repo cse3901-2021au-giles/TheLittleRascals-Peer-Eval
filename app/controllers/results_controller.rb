@@ -35,16 +35,16 @@ class ResultsController < ApplicationController
 
             puts @result.score
 
-        if @result.save
-            email = User.find(session[:current_user]).email
-            puts `\npython3 smtp.py #{email} "1"`
-            @polling = Polling.where(user_id: session[:current_user], poll_id: @poll_id).first
-            @polling.update_attribute(:is_complete, true)
-            return redirect_to user_path(session[:current_user]), notice: "submitted successful"
-        else 
-            puts "-------------------------"
-            render :new
-        end
+            if @result.save
+                email = User.find(session[:current_user]).email
+                puts `\npython3 smtp.py #{email} "1"`
+                @polling = Polling.where(user_id: session[:current_user], poll_id: @poll_id).first
+                @polling.update_attribute(:is_complete, true)
+                return redirect_to user_path(session[:current_user]), notice: "submitted successful"
+            else 
+                puts "-------------------------"
+                render :new
+            end
 
         end 
         @polling = Polling.where(user_id: session[:current_user], poll_id: @poll_id).first
