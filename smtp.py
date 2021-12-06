@@ -34,13 +34,11 @@ try:
         message = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (fromEmail, to, subject,
                                                                      date, message_text)
     elif int(msg_type) == 4:
-        student_name = sys.argv[3]
-        subject = "Student's Score Below Threshold"
-        date = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
-        message_text = "Student %s has a score that is below the expected threshold\n\n-Littlerascals" % student_name
-        message = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (fromEmail, to, subject,
-                                                                     date, message_text)
-
+            subject = "You Have Successfully Created an Account"
+            date = datetime.datetime.now().strftime("%d/%m/%Y %H:%M")
+            message_text = "Account created at %s for email: %s \nEnter any password at login\n-Littlerascals :)" % (date, to)
+            message = "From: %s\nTo: %s\nSubject: %s\nDate: %s\n\n%s" % (fromEmail, to, subject,
+                                                                         date, message_text)
     elif int(msg_type) == 5:
             temp_password = sys.argv[3]
             subject = "Password Has Been Reset"
