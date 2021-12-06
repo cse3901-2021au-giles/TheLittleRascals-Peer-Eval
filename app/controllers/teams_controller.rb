@@ -4,9 +4,12 @@ class TeamsController < ApplicationController
         @project_id = params[:project_id]
         @user = User.find(session[:current_user])
         @team = Team.new
+        @all_users = [User.all.pluck(:email)]
     end
 
     def create
+
+        @all_users = [User.all.pluck(:email)]
         @group_id = params[:group_id]
         @project_id = params[:project_id]
         @team_size = params[:team_size]
@@ -14,39 +17,52 @@ class TeamsController < ApplicationController
         @users = @group.users.where.not(admin: true).ids
         @users = @users.shuffle
         @team_splits = @users.each_slice(@team_size.to_i).to_a
+        if params[:commit] == "Generate Teams"
+            @team_splits.length.times do |i|
+                @team_members = @team_splits[i]
+                @team = Team.new(team_params)
+                @team.name = LiterateRandomizer.word
+                @team.description = "Random description for the team"
+                @team.group_id = @group_id
+                @team.project_id = @project_id
+                if @team.save
+                    @project = Project.find(@project_id)
+                    @project.update_attribute(:has_team, true)
+                    @team_size.to_i.times do |j|
+                        @teaming = Teaming.new
+                        @teaming.team_id = @team.id
+                        @teaming.user_id = @team_members[j]
+                        @teaming.save
+                    end
+                    if i == @team_size.to_i-1
+                        return redirect_to user_path(session[:current_user]), notice: "New team created successful"
+                    end
+                else
 
-        @team_splits.length.times do |i|
-            @team_members = @team_splits[i]
-            @team = Team.new(team_params)
-            @team.name = LiterateRandomizer.word
-            @team.description = "Random description for the team"
-            @team.group_id = @group_id
-            @team.project_id = @project_id
-            if @team.save
-                @project = Project.find(@project_id)
-                @project.update_attribute(:has_team, true)
-                @team_size.to_i.times do |j|
-                    @teaming = Teaming.new
-                    @teaming.team_id = @team.id
-                    @teaming.user_id = @team_members[j]
-                    @teaming.save
-                end  
-                if i == @team_size.to_i-1
-                    return redirect_to user_path(session[:current_user]), notice: "New team created successful"
-                end 
-            else 
-                render :new
-            end 
-        end 
-    end 
+
+                end
+
+            end
+        elsif params[:commit] == "Manually Pick"
+            @team_members = @team.members
+            @team.save
+
+
+
+        end
+        end
 
     def show_teams
         @project = Project.find(params['project_id'])
         @user = User.find(params['user_id'])
-    end 
+    end
+
+
 
 
     def team_params
+        @all_users = [User.all.pluck(:email)]
         params.require(:team).permit(:name, :description)
     end
-end
+
+    end

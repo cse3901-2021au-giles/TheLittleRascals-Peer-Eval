@@ -13,5 +13,12 @@
     <%= text_field_tag :team_size, params[:team_size], :required =>  true%>
     <br>
     <%= f.submit "Generate Teams"%>
+    <%= f.submit "Manually Pick"%>
+
+    <%= @all_users.each_index do |x| %>
+    <%= f.label x %>
+    <%= f.check_box :members%>
+    <% end %>
+
 
 <% end %>
