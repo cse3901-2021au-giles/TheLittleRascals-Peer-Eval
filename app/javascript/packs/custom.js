@@ -9,10 +9,9 @@ add_student = () => {
 
 }
 
-var blink_time = 1000;
 
 var t = setInterval(function () {
     var ele =document.getElementsByClassName('notice')[0];
     ele.style.visibility = 'hidden';
-}, blink_time);
+}, 1000);
 

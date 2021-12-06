@@ -1,4 +1,4 @@
-require_relative '../../lib/smtp'
+# require_relative '../../lib/smtp'
 class ResultsController < ApplicationController
     def new
         @result = Result.new

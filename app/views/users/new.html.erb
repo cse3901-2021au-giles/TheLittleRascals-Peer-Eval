@@ -3,20 +3,37 @@
 <% if @error%>
     <p class="error-msg flex center" ><%= @error %> </p>
 <%end%>
+<% if notice%>
+    <p class="notice flex center"><%= notice %> </p>
+<%end%>
+
+<div class=" header v-center space-between flex padding-show">
+    <div class="flex">
+        <div class="font-all ">
+            Create A New User
+        </div>
+
+    </div>
+</div>
+
+<div class="padding font-all-2 top-space">
 <% if @is_temp_user %>
-<h1> Add New Student</h1>
 <%= form_for @user do |f| %>
     <%= f.label :fname %>
+    <br>
     <%= f.text_field :fname, :required =>  true%>
     <br>
     <%= f.label :lname %>
+    <br>
     <%= f.text_field :lname, :required =>  true%>
     <br>
     <%= f.label :email %>
+    <br>
     <%= f.text_field :email, :required =>  true%>
     <br>
     <div class="none">
     <%= f.label :password %>
+    <br>
     <%= f.password_field :password, :required =>  true%>
     <br>
     </div>
@@ -25,25 +42,26 @@
     <br>
     <%= hidden_field_tag(:temp_user, '')%>
     <%= hidden_field_tag(:group_id, @group_id)%>
-    <%= f.submit "Create Account"%>
+    <%= f.submit "Create Account", class: "btn btn-all top-space" %>
 
 <% end %>
 
 <% else%>
-<h1> New Users Page</h1>
-
-
 <%= form_for @user do |f| %>
     <%= f.label :fname %>
+    <br>
     <%= f.text_field :fname, :required =>  true%>
     <br>
     <%= f.label :lname %>
+    <br>
     <%= f.text_field :lname, :required =>  true%>
     <br>
     <%= f.label :email %>
+    <br>
     <%= f.text_field :email, :required =>  true%>
     <br>
     <%= f.label :password %>
+    <br>
     <%= f.password_field :password, :required =>  true%>
     <br>
     <div class="none">
@@ -51,10 +69,13 @@
     <%= f.check_box :admin, checked: true%>
     </div>
     <%= label_tag :group_name%>
+    <br>
     <%= text_field_tag 'group', value = nil, :required => true%>
     <br>
-    <%= f.submit "Create Account" %>
+    <%= f.submit "Create Account", class: "btn btn-all top-space" %>
 
 <% end %>
 
 <% end %>
+
+</div>

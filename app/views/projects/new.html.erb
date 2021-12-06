@@ -1,13 +1,31 @@
+<%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
+<% if notice%>
+    <p class="notice flex center"><%= notice %> </p>
+<%end%>
+
+<div class=" header v-center space-between flex padding-show">
+    <div class="flex">
+        <div class="font-all ">
+            Add A Project
+        </div>
+
+    </div>
+
+</div>
+<div class="font-all-2 padding top-space">
 <%= form_for @project do |f| %>
     <%= f.label :name %>
+    <br>
     <%= f.text_field :name, :required =>  true%>
     <br>
     <%= f.label :description %>
+    <br>
     <%= f.text_field :description, :required =>  true%>
     <br>
     <div class="none">
     <%= hidden_field_tag(:group_id, @group_id)%>
     </div>
-    <%= f.submit "Create Project"%>
+    <%= f.submit "Create Project", class: "btn btn-all top-space"%>
 
 <% end %>
+</div>

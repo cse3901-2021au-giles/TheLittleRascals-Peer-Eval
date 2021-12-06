@@ -1,23 +1,46 @@
 
+<div class=" header v-center space-between flex padding-show">
+    <div class="flex">
+        <div class="font-all ">
+            Submit A Poll
+        </div>
+    </div>
+</div>
+
+<div class="padding top-space">
 <%if !@user.admin%>
-<div><%= @project.name%></div>
-<div><%= @team.name%></div>
-<div><%= @poll.description%></div>
-<h1>Please complete the activity below</h1>
+    <div class="flex font-all-2">
+    <div>  
+        <div> Group Name: </div>
+        <div> Project Name: </div>
+        <div> Team Name:</div>
+        <div> Poll Description:</div>
+    
+    </div>
+    <div class="left-space-ll">
+        <div><%=@user.groups.find(@poll.group_id).name%></div>
+        <div><%= @project.name%></div>
+        <div><%= @team.name%></div>
+        <div><%= @poll.description%></div>
+    </div>
+    </div>
+
+<div class="font-all-2 poll top-space">Please complete the activity below</div>
 
 <%= form_for @result do |result|%>
 <% @team.users.each do |user|%>
-    <div>
-    <div class="flex">
-        <div><%= user.fname%>&nbsp<%= user.lname%> </div>
-    
+    <div class="top-space-ss">
+    <div >
+        <div>Please rate your teammate: <span class="bold"><%= user.fname%>&nbsp<%= user.lname%> </span></div>
+        <div class="flex top-space-sss">
         <div >
-        <%= label_tag :Rate_from_0_to_100%>
+        <%= label_tag :Rate_from_0_to_100 %>
         <%= text_field_tag "score_#{user.id}", value = nil, :required => true%>
         </div>
-        <div >
+        <div class="left-space-lll">
         <%= label_tag :Comment%>
         <%= text_field_tag "comment_#{user.id}", value = nil, :required => true%>
+        </div>
         </div>
     </div>
     </div>
@@ -26,9 +49,11 @@
     <%= hidden_field_tag(:team_id, @team.id)%>
     <%= hidden_field_tag(:project_id, @project.id)%>
     <%= hidden_field_tag(:poll_id, @poll.id)%>
-<%= result.submit "Submit" %>
+<%= result.submit "Submit", class:"btn btn-all top-space" %>
 <%end%>
 
 <%else%>
 <h1>Only student has access to this page</h1>
 <%end%>
+
+</div>

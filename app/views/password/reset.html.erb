@@ -1,8 +1,23 @@
-<div>
-  <h2>Reset Password</h2>
-  <p class="notice"><%= notice %> </p>
+
+<%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
+<% if notice%>
+    <p class="notice flex center"><%= notice %> </p>
+<%end%>
+
+<div class=" header v-center space-between flex padding-show">
+    <div class="flex">
+        <div class="font-all ">
+            Reset Password
+        </div>
+
+    </div>
+
+</div>
+
+<div class="padding font-all-2 top-space">
+
   <%= form_tag '/emailpassword' do %>
     Email: <%= text_field_tag :email%><br>
-    <%= submit_tag "Enter"%>
+    <%= submit_tag "Send", class: "btn btn-all top-space" %>
   <%end%>
 </div>

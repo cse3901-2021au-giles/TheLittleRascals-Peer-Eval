@@ -1,65 +1,101 @@
-<% if @user.admin %>
-    <%= @project.name%>
-    <%= @project.description%>
-
+<div class=" header v-center space-between flex padding-show">
     <div class="flex">
-    <div>
-    <h1>Open</h1>
-    <% @project.polls.each do |poll|%>
-        <%if poll.end_date > Date.today %>
-        <div class="flex font20 top-space"> 
-        <%= poll.description%>
-        <%= poll.created_at%>
-        <%= poll.end_date%>
+        <div class="font-all ">
+            View Poll Result
         </div>
-        <div class="flex">
-        <% @results_dict[poll.id].each do |team|%>
-            <div>
-                <%= @project.teams.find(team[0]).name%>
-                <% team[1].each do |user|%>
-                <div class="flex">
-                <tr><%= @group.users.find(user[0]).fname %></tr>
-                &nbsp
-                <div><%= @group.users.find(user[0]).lname %></div>
-                &nbsp
-                <div><%= user[1] %></div>
-                </div>
-                <%end %>
-            </div>
-        <%end%>
-        </div>
-        <%end%>
-    <%end%>
-    </div>
-    <div>
-    <h1>Closed</h1>
-        <% @project.polls.each do |poll|%>
-        <%if poll.end_date < Date.today %>
-        <div class="flex font20 top-space"> 
-        <%= poll.description%>
-        <%= poll.created_at%>
-        <%= poll.end_date%>
-        </div>
-        <div class="flex">
-        <% @results_dict[poll.id].each do |team|%>
-            <div>
-                <%= @project.teams.find(team[0]).name%>
-                <% team[1].each do |user|%>
-                <div class="flex">
-                <tr><%= @group.users.find(user[0]).fname %></tr>
-                &nbsp
-                <div><%= @group.users.find(user[0]).lname %></div>
-                &nbsp
-                <div><%= user[1] %></div>
-                </div>
-                <%end %>
-            </div>
-        <%end%>
-        </div>
-        <%end%>
-    <%end%>
+        
+
     </div>
 </div>
+
+<div class= "padding-show-2 top-space">
+<% if @user.admin %>
+    <div class="flex font-all-2">
+    <div>  
+        <div> Project Name: </div>
+        <div> Project Description:</div>
+    
+    </div>
+    <div class="left-space-ll">
+        <div> <%= @project.name%></div>
+        <div><%= @project.description%> </div>
+        
+    </div>
+    </div>
+    <div class="font-normal bold font20 top-space">Open Polls</div>
+    <table class="font-normal ">
+        <% @project.polls.each do |poll|%>
+            <%if poll.end_date > Date.today %>
+            <tr class="table-border">
+                    <td class="right-border">
+                        <div class="flex font20"> 
+                        Description: <%= poll.description%>
+                        <br />
+                        Creation: <%= poll.created_at%>
+                        <br />
+                        End Date: <%= poll.end_date%>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="font20">
+                            <% @results_dict[poll.id].each do |team|%>
+                                    <div>
+                                        <span class="font-bg"> Team: <%= @project.teams.find(team[0]).name%></span>
+                                        <% team[1].each do |user|%>
+                                        <div><%= @group.users.find(user[0]).fname %>
+                                        &nbsp
+                                        <%= @group.users.find(user[0]).lname %>
+                                        &nbsp | &nbsp
+                                        <%= @group.users.find(user[0]).email %>
+                                        &nbsp | &nbsp<%= user[1] %></div>
+                                        <%end %>
+                                    </div>
+                            <%end%>
+                        </div>
+                    </td>
+            </tr>
+            <%end%>
+        <% end %>
+    </table>
+
+    <div class="font-normal bold font20 top-space">Closed Polls</div>
+    <table class="font-normal ">
+        <% @project.polls.each do |poll|%>
+            <%if poll.end_date < Date.today %>
+            <tr class="table-border">
+                    <td class="right-border">
+                        <div class="flex font20"> 
+                        Description: <%= poll.description%>
+                        <br />
+                        Creation: <%= poll.created_at%>
+                        <br />
+                        End Date: <%= poll.end_date%>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="font20">
+                            <% @results_dict[poll.id].each do |team|%>
+                                    <div>
+                                        <span class="font-bg"> Team: <%= @project.teams.find(team[0]).name%></span>
+                                        <% team[1].each do |user|%>
+                                        <div><%= @group.users.find(user[0]).fname %>
+                                        &nbsp
+                                        <%= @group.users.find(user[0]).lname %>
+                                        &nbsp | &nbsp
+                                        <%= @group.users.find(user[0]).email %>
+                                        &nbsp | &nbsp<%= user[1] %></div>
+                                        <%end %>
+                                    </div>
+                            <%end%>
+                        </div>
+                    </td>
+            </tr>
+            <%end%>
+        <% end %>
+    </table>
+
 <%else%>
 <h1>Permission denied, you do not have the permission to view this page.</h1>
 <%end%>
+
+</div>

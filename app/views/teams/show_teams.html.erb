@@ -1,32 +1,51 @@
-<% if @user.admin %>
-    <%= "Project Name: " + @project.name%>
-    <br />
-    <%= "Project Description: " + @project.description%>
-    <br />
-    <br />
+<div class=" header v-center space-between flex padding-show">
+    <div class="flex">
+        <div class="font-all ">
+            View Teams
+        </div>
+        
 
-    <table>
+    </div>
+</div>
+<div class="top-space padding-show-2">
+<% if @user.admin %>
+    <div class="flex font-all-2">
+    <div>  
+        <div> Project Name: </div>
+        <div> Project Description:</div>
+    
+    </div>
+    <div class="left-space-ll">
+        <div> <%= @project.name%> </div>
+        <div> <%= @project.description%> </div>
+        
+    </div>
+    </div>
+
+    <table class="font-normal top-space">
         <% @project.teams.each do |team|%>
             <tr class="table-border">
                     <td class="right-border">
                         <div class="flex font20"> 
-                        Team <%= team.name%>
+                        Team: <%= team.name%>
                         <br />
-                        <%= team.description%>
+                        Description: <%= team.description%>
                         </div>
                     </td>
                     <td>
                         <div class="font20">
                             Team Members
-                            <div class="flex">
+                            
                                 <% team.users.each do |member|%>
+                                <div class="flex">
                                     <div><%= member.fname%></div>
                                     &nbsp
                                     <div><%= member.lname%></div>
-                                    &nbsp
+                                    &nbsp | &nbsp
                                     <div><%= member.email%></div>
+                                     </div>
                                 <%end%>
-                            </div>
+                           
                         </div>
                     </td>
             </tr>
@@ -34,3 +53,5 @@
     </table>
 
 <%end%>
+
+</div>

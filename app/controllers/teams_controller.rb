@@ -22,6 +22,7 @@ class TeamsController < ApplicationController
             @team.description = "Random description for the team"
             @team.group_id = @group_id
             @team.project_id = @project_id
+
             if @team.save
                 @project = Project.find(@project_id)
                 @project.update_attribute(:has_team, true)

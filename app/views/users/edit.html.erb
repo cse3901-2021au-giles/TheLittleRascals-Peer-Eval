@@ -1,17 +1,35 @@
-<div class="notice"><%= notice %> </div>
+<%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
+<% if notice%>
+    <p class="notice flex center"><%= notice %> </p>
+<%end%>
+<div class=" header v-center space-between flex padding-show">
+    <div class="flex">
+        <div class="font-all ">
+            Edit Profile
+        </div>
+
+    </div>
+
+</div>
+<div class="padding top-space font-all-2">
 <%= form_for @user do |f| %>
-    <%= f.label :fname %>
+    <%= f.label :First_Name %>
+    <br>
     <%= f.text_field :fname, value:@user_info.fname, :required =>  true%>
     <br>
-    <%= f.label :lname %>
+    <%= f.label :Last_Name %>
+    <br >
     <%= f.text_field :lname, value:@user_info.lname, :required =>  true%>
     <br>
-    <%= f.label :email %>
+    <%= f.label :Email %>
+    <br>
     <%= f.text_field :email, value:@user_info.email, :required =>  true%>
     <br>
-    <%= f.label :password %>
+    <%= f.label :Password %>
+    <br>
     <%= f.password_field :password, :required =>  true%>
     <br>
-    <%= f.submit "Save Changes", class: "btn btn-primary" %>
+    <%= f.submit "Save Changes", class: "btn btn-all top-space" %>
 
     <% end %>
+</div>
