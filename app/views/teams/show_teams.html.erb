@@ -10,48 +10,54 @@
 <div class="top-space padding-show-2">
 <% if @user.admin %>
     <div class="flex font-all-2">
-    <div>  
-        <div> Project Name: </div>
-        <div> Project Description:</div>
-    
-    </div>
-    <div class="left-space-ll">
-        <div> <%= @project.name%> </div>
-        <div> <%= @project.description%> </div>
+        <div>  
+            <div> Project Name: </div>
+            <div> Project Description:</div>
         
+        </div>
+        <div class="left-space-ll">
+            <div> <%= @project.name%> </div>
+            <div> <%= @project.description%> </div>
+            
+        </div>
     </div>
-    </div>
+    <br />
 
-    <table class="font-normal top-space">
-        <% @project.teams.each do |team|%>
-            <tr class="table-border">
-                    <td class="right-border">
-                        <div class="flex font20"> 
-                        Team: <%= team.name%>
-                        <br />
-                        Description: <%= team.description%>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="font20">
-                            Team Members
-                            
-                                <% team.users.each do |member|%>
-                                <div class="flex">
-                                    <div><%= member.fname%></div>
-                                    &nbsp
-                                    <div><%= member.lname%></div>
-                                    &nbsp | &nbsp
-                                    <div><%= member.email%></div>
-                                     </div>
-                                <%end%>
-                           
-                        </div>
-                    </td>
+    <div class="table-show">
+        <table class="table font14">
+            <tr>
+                <th>Teams</th>
+                <th>Members</th>
             </tr>
-        <% end %>
-    </table>
-
+                <% @project.teams.each do |team|%>
+                    <tr class="">  
+                
+                        <td class="right-border">
+                            <div class="flex font20"> 
+                                Team: <%= team.name%>
+                                <br />
+                                Description: <%= team.description%>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="font20">                            
+                                <% team.users.each do |member|%>
+                                    <div class="flex">
+                                        <div><%= member.fname%></div>
+                                        &nbsp
+                                        <div><%= member.lname%></div>
+                                        &nbsp | &nbsp
+                                        <div><%= member.email%></div>
+                                    </div>
+                                <%end%>
+                            </div>
+                        </td>
+                    </tr>
+                <%end%>
+            </tr>
+        </table>
+    </div>
+    
 <%end%>
 
 </div>

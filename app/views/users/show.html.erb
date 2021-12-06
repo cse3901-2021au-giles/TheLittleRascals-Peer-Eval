@@ -132,73 +132,73 @@
      </div>
 
      <%else%>
-          <div class="padding-show-2 ">
-          <div>
-          <div class="font-all-2">Opening Polls</div>
-
-
-          <table class="poll top-space-ss">
-               <tr>
-                    <th> Group</th>
-                    <th> Project</th>
-                    <th> Team</th>
-                    <th> Poll Info</th>
-                    <th> Due Date</th>
-                    <th> Action</th>
-               </tr>
-               <%@user.polls.each do |poll|%>
-               <tr>
-               <%if poll.end_date > Date.today %>
-
-               <td><%=@user.groups.find(poll.group_id).name%></td>
-               
-               <td><%=@user.groups.find(poll.group_id).projects.find(poll.project_id).name%></td>
-               <td><%=@user.teams.where(project_id: poll.project_id).first.name%></td>
-               <td><%= poll.description%></td>
-               <td><%= poll.end_date %></td>
-               <%if @user.pollings.where(poll_id: poll.id).first.is_complete%>
-               <td> Completed </td>
-               <%else%>
-               <td><%= button_to "Complete Activity", new_result_path, method: :get, params: {:project_id => poll.project_id, :team_id => @user.teams.where(project_id: poll.project_id).first.id, :poll_id => poll.id}, class: "btn btn-normal"%>  </td>
-               <%end%>
+          <div class="padding-show-2 table-show">
           
-               <%end %>
-               </tr>
-               <%end%>
-          </table>
-     </div>
+               <div class="font-all-2">Opening Polls</div>
 
-          <div>
-               <div class="font-all-2 top-space">Closed Polls</div>
-               <table class="poll top-space-ss">
-               <tr>
-                    <th> Group</th>
-                    <th> Project</th>
-                    <th> Team</th>
-                    <th> Poll Info</th>
-                    <th> Due Date</th>
-                    <th> Action</th>
-               </tr>
-               <%@user.polls.each do |poll|%>
-               <tr>
-               <%if poll.end_date < Date.today %>
 
-               <td><%=@user.groups.find(poll.group_id).name%></td>
+               <table class="poll top-space-ss table font14">
+                    <tr>
+                         <th> Group</th>
+                         <th> Project</th>
+                         <th> Team</th>
+                         <th> Poll Info</th>
+                         <th> Due Date</th>
+                         <th> Action</th>
+                    </tr>
+                    <%@user.polls.each do |poll|%>
+                    <tr>
+                    <%if poll.end_date > Date.today %>
+
+                    <td><%=@user.groups.find(poll.group_id).name%></td>
+                    
+                    <td><%=@user.groups.find(poll.group_id).projects.find(poll.project_id).name%></td>
+                    <td><%=@user.teams.where(project_id: poll.project_id).first.name%></td>
+                    <td><%= poll.description%></td>
+                    <td><%= poll.end_date %></td>
+                    <%if @user.pollings.where(poll_id: poll.id).first.is_complete%>
+                    <td> Completed </td>
+                    <%else%>
+                    <td><%= button_to "Complete Activity", new_result_path, method: :get, params: {:project_id => poll.project_id, :team_id => @user.teams.where(project_id: poll.project_id).first.id, :poll_id => poll.id}, class: "btn btn-normal"%>  </td>
+                    <%end%>
                
-               <td><%=@user.groups.find(poll.group_id).projects.find(poll.project_id).name%></td>
-               <td><%=@user.teams.where(project_id: poll.project_id).first.name%></td>
-               <td><%= poll.description%></td>
-               <td><%= poll.end_date %></td>
-               <td><%= button_to "View Results", "/view-results", method: :get, params: {:project_id => poll.project_id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
-
-               <%end %>
-               </tr>
-               <%end%>
+                    <%end %>
+                    </tr>
+                    <%end%>
                </table>
- 
+          </div>
+          <div class="padding-show-2 table-show">
+               <div class="font-all-2 top-space">Closed Polls</div>
+                    <table class="poll top-space-ss table font14">
+                    <tr>
+                         <th> Group</th>
+                         <th> Project</th>
+                         <th> Team</th>
+                         <th> Poll Info</th>
+                         <th> Due Date</th>
+                         <th> Action</th>
+                    </tr>
+                    <%@user.polls.each do |poll|%>
+                    <tr>
+                    <%if poll.end_date < Date.today %>
+
+                    <td><%=@user.groups.find(poll.group_id).name%></td>
+                    
+                    <td><%=@user.groups.find(poll.group_id).projects.find(poll.project_id).name%></td>
+                    <td><%=@user.teams.where(project_id: poll.project_id).first.name%></td>
+                    <td><%= poll.description%></td>
+                    <td><%= poll.end_date %></td>
+                    <td><%= button_to "View Results", "/view-results", method: :get, params: {:project_id => poll.project_id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+
+                    <%end %>
+                    </tr>
+                    <%end%>
+                    </table>
+     
+               </div>
           </div>
 
-          <div class="top-space">
+          <div class="top-space padding-show-2">
                <div class="font-all-2">Your Team Assignment</div>
                <%@user.teams.each do |team|%>
                
