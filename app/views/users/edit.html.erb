@@ -12,6 +12,11 @@
 
 </div>
 <div class="padding top-space font-all-2">
+<% if @user_info.temp_user%>
+    <div class="red bottom-space-sss">Your instructors have already created an account for you, please update your password to activate your account.</div>
+<%end %>
+
+<div class="red">Password must contain an uppercase letter, a symbol, a number and be 8 in length.</div>
 <%= form_for @user do |f| %>
     <%= f.label :First_Name %>
     <br>
