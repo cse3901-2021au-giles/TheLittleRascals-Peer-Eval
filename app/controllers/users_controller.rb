@@ -18,8 +18,6 @@ class UsersController < ApplicationController
         exists_error_at_create = "This student is already created."
         if User.exists?(email: @user.email) && session[:current_user]
             return redirect_to user_path(session[:current_user]), notice: exists_error_at_create
-        elsif User.exists?(email: @user.email)
-            return redirect_to login_path, notice: exists_error
         end 
         
 

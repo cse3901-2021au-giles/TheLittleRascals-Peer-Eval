@@ -20,6 +20,31 @@
     color: red
 }
 
+.left{
+    width: 45%;
+    margin-right: 5%;
+    background-color: #b5bdc2;
+    padding: 5%;
+}
+.right{
+    width: 50%
+}
+.header p{
+    color:white;
+    font-size: 50px;
+}
+
+.white{
+    color:white
+}
+
+.main-col{
+    width: 90%;
+    margin-left: 5%;
+}
+.login{
+    height: 150px !important;
+}
 .none {
     display: none !important;
 }
@@ -31,7 +56,7 @@
 }
 
 .header {
-    background-color: orange;
+    background-color: #4b5b66;
 }
 
 .flex-bundle {
@@ -320,8 +345,7 @@ footer {
 
 .header {
     width: 100%;
-    height: 60px;
-    font-size: 14px;
+    height: 100px;
 }
 
 

@@ -69,9 +69,11 @@
                               </div>
                          </td>
                          <td>
-                              <% if student.id != @user.id%>
+                              <% if student.id != @user.id && @group.owner != student.id%>
                               <div><%= link_to "Delete", student, method: :delete, class: "btn btn-danger"%></div>
-                              <%else %>
+                              <%elsif @group.owner == student.id%>
+                              <div>Owner</div>
+                              <%else%>
                               <div>You</div>
                               <%end%>
                          </td>
