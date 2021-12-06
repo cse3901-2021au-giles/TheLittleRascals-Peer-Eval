@@ -1,4 +1,8 @@
 
+<%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
+<% if @error%>
+    <p class="error-msg flex center" ><%= @error %> </p>
+<%end%>
 <% if @is_temp_user %>
 <h1> Add New Student</h1>
 <%= form_for @user do |f| %>
@@ -28,7 +32,7 @@
 <% else%>
 <h1> New Users Page</h1>
 
-<p class="notice"><%= @error %> </p>
+
 <%= form_for @user do |f| %>
     <%= f.label :fname %>
     <%= f.text_field :fname, :required =>  true%>

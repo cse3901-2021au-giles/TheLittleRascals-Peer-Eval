@@ -1,4 +1,9 @@
+<%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
+<% if notice%>
+    <p class="notice flex center"><%= notice %> </p>
+<%end%>
 <div>
+
     <div class="header font50 flex center login">
         <p class="bold">
         Welcome to Happy Eval <span class="font20">- Proudly Presented to you by Team The Little Rascal</span>
@@ -10,12 +15,13 @@
                 <span class="white font20 bold">Intro</span> <br>
                 <span>
                 In classes with presentations, such as CSE 3901, evaluations of these presentations by audience members (ie other students in the class) can be a useful component of the grading rubric. The feedback from these evaluations is useful to the instructor for assigning a score to an individual student, as well as to the students for receiving constructive criticism from their peers.
+                This tool developed by team the little rascal serves the purpose of peer-evaluation with ease and fairness. 
                 </span>
             </div>
         </div>
         <div class="right ">
             <h2 class="font32 bold main-color">Log in or sign up to continue!</h2>
-            <p class="notice"><%= notice %> </p>
+            
             <%= form_tag '/login' do %>
                 <div class="top-space-sss form-text "> Email: <br> <%= text_field_tag :email%></div>
                 <div class="top-space-sss form-text "> Password: <br> <%= password_field_tag :password%></div>

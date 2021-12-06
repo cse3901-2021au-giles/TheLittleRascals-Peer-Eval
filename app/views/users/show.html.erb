@@ -1,53 +1,97 @@
 <%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
+<% if notice%>
+    <p class="notice flex center"><%= notice %> </p>
+<%end%>
 <div>
-     <p class="notice"><%= notice %> </p>
 
-     <nav class="navbar navbar-expand-lg navbar-light">
 
-     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-               <li class="nav-item">
+     <div class=" header v-center space-between flex padding-show">
+          <div class="flex">
+               <div class="font-all">
                     <%= "Welcome " + @user.fname + " " + @user.lname + "!"%>
-               </li>
-               <li class="nav-item">
-                    <%= "Your email: " + @user.email%>
-               </li>
-               <li class="nav-item">
-                    <% if @user.admin%>
-                         <%= "You manage group number " + @user.groups.first.id.to_s + ": " + @user.groups.first.name%>
+               </div>
+               
 
-                    <% else %>
-                         <%= "Your groups are "%>
-                         <% @user.groups.each do |group| %>
-                         <%= "ID: " + group.id.to_s%>
-                         <%= "Name: " + group.name%>
-                         <% end %>
-                    <% end %>
-               </li>
-          </ul>
-          </div class="my-2 my-lg-0">
-               <%= button_to "Logout", logout_path, method: :post, class: "btn btn-danger"%>
-               <%= button_to "Update Profile", edit_user_path, method: :get, class: "btn btn-info"%>
           </div>
-          
-     </nav>
-     
+          <div class="flex">
+               <%= button_to "Logout", logout_path, method: :post, class: "btn btn-all"%>
+               <%= button_to "Update Profile ", edit_user_path, method: :get, class: "btn btn-all"%>
+          </div>
+
+     </div>
+     <div class="padding-show flex">
+     <div class="font-normal">
+          <%= "Your email: " + @user.email%>
+     </div>
+     <div class="font-normal left-space-lllll">
+          <% if @user.admin%>
+               <%= "You manage group number " + @user.groups.first.id.to_s + ": " + @user.groups.first.name%>
+
+          <% else %>
+               <%= "Your groups are "%>
+               <% @user.groups.each do |group| %>
+               <%= "ID: " + group.id.to_s%>
+               <%= "Name: " + group.name%>
+               <% end %>
+          <% end %>
+     </div>
+     </div>
      <br />
      <% if @user.admin %>
-     <div class="flex">
-     <%= button_to "Add Student", new_user_path, method: :get, params: {:temp_user => true, :has_group => true, :group_id => @user.groups.first.id}, class: "btn btn-success"%>
-     <%= button_to "Add Project", new_project_path, method: :get, params: {:group_id => @user.groups.first.id}, class: "btn btn-success"%>
+     <div class="flex padding-show">
+     <%= button_to "Add Student", new_user_path, method: :get, params: {:temp_user => true, :has_group => true, :group_id => @user.groups.first.id}, class: "btn btn-all"%>
+     <%= button_to "Add Project", new_project_path, method: :get, params: {:group_id => @user.groups.first.id}, class: "btn btn-all left-space"%>
      </div>
      <br />
 
 
-     <div class="table-wrapper">
-          <table class="table-half table-border">
-               <tr>
-                    <th class="font20">Your Class</th>
-               </tr>
+     <div class="padding-show-2  table-show">
+          <div class="font-normal bold font20">Your Projects</div>
+          <table class="table font14">
+                    <tr>
+                         <th>Name</th>
+                         <th>Descript</th>
+                         <th>Action</th>
+                         <th>View Team</th>
+                         <th>Send Poll</th>
+                         <th>View Poll </th>
+                    </tr>
+               <% @group.projects.each do |project|%>
+                    <tr class="">  
+                    
+                         <td>
+                              <%= project.name%>
+                         </td>
+                         <td>
+                              <%= project.description%>
+                         </td>
+                         <td>
+                              <%= button_to "Delete", project, method: :delete, class: "btn btn-normal"%>
+                         </td>
+                         <% if !project.has_team%>
+                              <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+                              <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal invisible"%></td>
+                              <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal invisible"%></td>
+                              <% else%>
+                              <td><%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+                              <td><%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+                              <td><%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+                         <%end%>
+                    </tr>
+               <% end %>
+          </table>
+          <div class="font-normal bold font20">Your Students</div>
+          <table class="table ">
+                    <tr>
+                         <th>Status</th>
+                         <th>First Name</th>
+                         <th>Last Name</th>
+                         <th>Email</th>
+                         <th>Role</th>
+                         <th>Action</th>
+                    </tr>
                <% @group.users.each do |student|%>
-                    <tr class="table-border">  
+                    <tr class="">  
                     
                          <td>
                               <div><%= student.temp_user ? "Inactive" : "Active"%></div>
@@ -70,7 +114,7 @@
                          </td>
                          <td>
                               <% if student.id != @user.id && @group.owner != student.id%>
-                              <div><%= link_to "Delete", student, method: :delete, class: "btn btn-danger"%></div>
+                              <div><%= link_to "Delete", student, method: :delete, class: "btn btn-normal"%></div>
                               <%elsif @group.owner == student.id%>
                               <div>Owner</div>
                               <%else%>
@@ -80,35 +124,8 @@
                     </tr>
                <% end %>
           </table>
-
-          <table class="table-half table-border">
-               <tr>
-                    <th class="font20">Your Projects</th>
-               </tr>
-               <% @group.projects.each do |project|%>
-                    <tr class="table-border">  
-                    
-                         <td>
-                              <%= project.name%>
-                         </td>
-                         <td>
-                              <%= project.description%>
-                         </td>
-                         <td>
-                              <%= button_to "Delete", project, method: :delete, class: "btn btn-danger"%>
-                         </td>
-                         <% if !project.has_team%>
-                              <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-success"%></td>
-                              <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-success invisible"%></td>
-                              <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-success invisible"%></td>
-                              <% else%>
-                              <td><%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}, class: "btn btn-primary"%></td>
-                              <td><%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-primary"%></td>
-                              <td><%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-primary"%></td>
-                         <%end%>
-                    </tr>
-               <% end %>
-          </table>
+          
+ 
      </div>
 
      <%else%>
@@ -175,5 +192,9 @@
      <%end%>
 
 
-
+     <div class="footer flex center font20">
+          <span>
+          Happy Eval - The Little Rascal
+          </span>
+     </div>
 </div>
