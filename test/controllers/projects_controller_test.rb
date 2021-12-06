@@ -11,5 +11,16 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should get show" do
+    project = projects(:one)
+    get :show, params: {param: 'project_id'}
+    assert_response :success
+  end
+
+  test "should get destroy" do
+    get :destroy
+    assert_response :success
+  end
+
 
 end

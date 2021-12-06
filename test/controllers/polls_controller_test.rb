@@ -5,23 +5,22 @@ class PollsControllerTest < ActionController::TestCase
   #   assert true
   # end
 
-  
-  
-  
-
   test "should get new" do
     get :new
     assert_response :success
   end
 
-  # test "should get create" do
-  #   @post = polls(:one)
-  #   get :create, params: {id: @post}, post = {polls}
-  #   assert_response :success
-  # end
+  test "should get create" do
+    @poll = polls(:one)
+    get :new
+    assert_response :success
+  end
 
-
-
+  test "should get show_polls" do
+    @poll = polls(:one)
+    get :new
+    assert_response :success
+  end
 
 
 end
