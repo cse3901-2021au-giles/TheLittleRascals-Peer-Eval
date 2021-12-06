@@ -9,11 +9,14 @@
 
     </div>
 
+<div class="padding top-space font-all-2">
 <%= form_for @team do |f| %>
     <%= f.label :name %>
+    <br>
     <%= f.text_field :name, :required =>  true%>
     <br>
     <%= f.label :description %>
+    <br>
     <%= f.text_field :description, :required =>  true%>
     <br>
     <div class="none">
@@ -21,8 +24,10 @@
     <%= hidden_field_tag(:project_id, @project_id)%>
     </div>
     <%= label_tag "Team Size"%>
+    <br>
     <%= text_field_tag :team_size, params[:team_size], :required =>  true%>
     <br>
-    <%= f.submit "Generate Teams"%>
+    <%= f.submit "Generate Teams", class: "btn btn-all top-space"%>
 
 <% end %>
+</div>

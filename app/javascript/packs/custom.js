@@ -13,5 +13,5 @@ add_student = () => {
 var t = setInterval(function () {
     var ele =document.getElementsByClassName('notice')[0];
     ele.style.visibility = 'hidden';
-}, 1000);
+}, 2000);
 
