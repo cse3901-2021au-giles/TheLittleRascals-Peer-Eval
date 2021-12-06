@@ -31,8 +31,34 @@
 }
 .header p{
     color:white;
-    font-size: 50px;
 }
+
+
+.form-text{
+    color: #4b5b66;
+    font-weight: bold;
+    font-size: 20px;
+}
+.main-color{
+    color: #4b5b66
+}
+
+.btn-all{
+    background-color: #4b5b66;
+    border-color: #4b5b66;
+    color: white;
+    width: 200px;
+    font-weight: bold;
+    font-size: 20px
+}
+
+.btn-all:hover{
+    background-color: #b5bdc2;
+    border-color: #b5bdc2;
+    color:#4b5b66;
+
+}
+
 
 .white{
     color:white
@@ -334,6 +360,9 @@
     font-size: 64px;
 }
 
+.font50 {
+    font-size: 50px;
+}
 
 /* footer */
 
