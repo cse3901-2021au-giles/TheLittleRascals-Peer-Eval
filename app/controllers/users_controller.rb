@@ -10,7 +10,6 @@ class UsersController < ApplicationController
         @user = User.all
     end
 
-
     
     def create 
         @user = User.new(user_params)
@@ -18,11 +17,7 @@ class UsersController < ApplicationController
         exists_error_at_create = "This student is already created."
         if User.exists?(email: @user.email) && session[:current_user]
             return redirect_to user_path(session[:current_user]), notice: exists_error_at_create
-        elsif User.exists?(email: @user.email)
-            return redirect_to login_path, notice: exists_error
         end 
-        
-
 
         alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         sym = "~`!@#$%^&*()_+-={[}]|\\:;"'<,>.?/'"`"
@@ -42,14 +37,14 @@ class UsersController < ApplicationController
         if params[:temp_user]
             @user.temp_user = true
             @user.password = "ToBeReset"
+            email = @user.email
+            puts `\npython3 smtp.py #{email} "4"`
+        else
+            email = @user.email
+            puts `\npython3 smtp.py #{email} "2"`
         end 
 
         if @user.save
-            email = @user.email
-            puts `\npython3 smtp.py #{email} "2"`
-            # fork{exec("python3 smtp.py \"#{email}\" \"1\"")}
-            # Kernel.exec("python3 smtp.py #{email} 2")
-            # session[:current_user] = @user.id
             if @user.temp_user
 
                 @grouping = Grouping.new

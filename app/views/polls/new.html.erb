@@ -1,14 +1,28 @@
+<div class=" header v-center space-between flex padding-show">
+    <div class="flex">
+        <div class="font-all ">
+             Send A New Poll
+        </div>
+        
+
+    </div>
+</div>
+
+<div class="padding top-space font-all-2">
 <%= form_for @poll do |f| %>
     <%= f.label :description %>
+    <br>
     <%= f.text_field :description, :required =>  true%>
     <br>
     <%= label_tag :end_date_from_now%>
-    <%= text_field_tag 'time', value = nil, :required => true%>
+    <br>
+    <%= text_field_tag 'time', value = nil, placeholder: "ex. 14", :required => true%>
     <br>
     <div class="none">
     <%= hidden_field_tag(:group_id, @group_id)%>
     <%= hidden_field_tag(:project_id, @project_id)%>
     </div>
-    <%= f.submit "Send Poll"%>
+    <%= f.submit "Send Poll", class:"btn btn-all top-space" %>
 
 <% end %>
+</div>
