@@ -76,7 +76,7 @@
                               <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal invisible"%></td>
                               <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal invisible"%></td>
                               <% else%>
-                              <td><%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+                              <td><%= button_to "View/Modify Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
                               <td><%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
                               <td><%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
                          <%end%>
