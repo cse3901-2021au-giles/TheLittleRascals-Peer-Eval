@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
-    def new 
+    def new
+        puts params
         @group_id = params[:group_id]
         @group = Group.find(@group_id )
         @project_id = params[:project_id]
@@ -7,12 +8,15 @@ class TeamsController < ApplicationController
         @user = User.find(session[:current_user])
         @team = Team.new
     end
-
     def create
         @group_id = params[:group_id]
         @project_id = params[:project_id]
-        if params[:team_size].length != 0
 
+        if params[:team_size].length != 0
+            # if params[:team_size] !~ /\A\d+\Z/
+            #     alert = "Size can only be numerical and within bounds"
+            #     redirect_to  create, notice: alert
+            # end
             @team_size = params[:team_size]
             @group = Group.find(@group_id)
             @users = @group.users.where.not(admin: true).ids
@@ -92,24 +96,6 @@ class TeamsController < ApplicationController
 
     def update
         @team = Team.find(params[:id])
-        # @to_remove = params['user_remove'].split
-        # @to_add = params['user_add'].split
-        # @project = Project.find(params['project_id'])
-        # for remove in @to_remove
-        #     if @team.users.ids.include?(remove.to_i)
-        #         Teaming.where(user_id: remove.to_i, team_id: @team.id).destroy_all
-
-        #     end 
-        # end 
-        
-        # for add in @to_add
-        #     if !@team.users.ids.include?(add.to_i) && !User.find(add.to_i).teams.where(project_id: @project.id).first
-        #         @teaming = Teaming.new
-        #         @teaming.user_id = add.to_i
-        #         @teaming.team_id = @team.id
-        #         @teaming.save
-        #     end 
-        # end 
         @team.update_attribute(:name, team_params['name'])
         @team.update_attribute(:description, team_params['description'])
 
