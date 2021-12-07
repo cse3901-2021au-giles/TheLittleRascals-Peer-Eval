@@ -27,7 +27,7 @@
     </div>
     </div>
     <div  class="flex font-all-2 red"> Student displayed in RED has yet to complete poll</div>
-    <div class="font-normal bold font20 top-space">Open Polls</div>
+    <div class=" poll font-normal bold font20 top-space">Open Polls</div>
 
 
     <div class="table-show">
@@ -51,7 +51,8 @@
                                 <% if poll.is_released %>
                                     <div>Released</div>
                                 <%else%>
-                                    <div class="flex">Not Released  <%= link_to "Release", edit_poll_path(poll.id), method: :patch, class: "btn btn-normal left-space"%></div>
+                                    <div class="flex">Not Released </div>
+                                    <div> <%= link_to "Release", edit_poll_path(poll.id), method: :patch, class: "btn btn-normal"%></div>
                                 <%end%>
                                 </div>
                                 </div>
@@ -149,7 +150,7 @@
 
 
 
-    <div class="font-normal bold font20 top-space">Closed Polls</div>
+    <div class="font-normal bold font20 top-space poll">Closed Polls</div>
     <div class="table-show">
         <table class="table table-border font14">
                 <% @project.polls.each do |poll|%>
@@ -171,7 +172,8 @@
                                 <% if poll.is_released %>
                                     <div>Released</div>
                                 <%else%>
-                                    <div class="flex">Not Released  <%= link_to "Release", edit_poll_path(poll.id), method: :patch, class: "btn btn-normal left-space"%></div>
+                                    <div class="flex">Not Released </div>
+                                    <div> <%= link_to "Release", edit_poll_path(poll.id), method: :patch, class: "btn btn-normal"%></div>
                                 <%end%>
                                 </div>
                                 </div>

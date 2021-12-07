@@ -49,7 +49,7 @@
 
 
      <div class="padding-show-2  table-show">
-          <div class="font-normal bold font20">Your Projects</div>
+          <div class="font-normal bold font20 ">Your Projects</div>
           <table class="table table-hover font14">
                     <tr>
                          <th>Name</th>
@@ -83,21 +83,24 @@
                     </tr>
                <% end %>
           </table>
-          <div class="font-normal bold font20">Your Students</div>
-          <table class="table table-hover ">
+          <div class="font-normal bold font20 ">Your Students</div>
+          <table class="table table-hover  table-scroll">
                     <tr>
-                         <th>Status</th>
+                         
+                         <th>User Id</th>
                          <th>First Name</th>
                          <th>Last Name</th>
                          <th>Email</th>
                          <th>Role</th>
+                         <th>Status</th>
                          <th>Action</th>
                     </tr>
                <% @group.users.each do |student|%>
                     <tr class="">  
                     
+
                          <td>
-                              <div><%= student.temp_user ? "Inactive" : "Active"%></div>
+                              <div><%= student.id%></div>
                          </td>
                          <td>
                               <div><%= student.fname%></div>
@@ -114,6 +117,9 @@
                                         Admin
                                    <% end %>
                               </div>
+                         </td>
+                         <td>
+                              <div><%= student.temp_user ? "Inactive" : "Active"%></div>
                          </td>
                          <td>
                               <% if student.id != @user.id && @group.owner != student.id%>

@@ -16,6 +16,10 @@
 
 @import "bootstrap/scss/bootstrap";
 
+.table-scroll{
+    overflow: scroll;
+}
+
  .notice {
     color: white;
     position: fixed;

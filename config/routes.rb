@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   resources :results
   resources :polls
   resources :teams
+   get '/modify_team', to: 'teams#modify_team'
+   post '/modify_team', to: 'teams#edit_team'
   resources :password, only: [:reset]
   resources :users, only: [:new, :create, :edit, :update, :show, :destroy]
    get '/password', to: 'password#reset'
