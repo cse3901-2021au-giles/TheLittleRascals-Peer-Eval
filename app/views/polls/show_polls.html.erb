@@ -46,7 +46,7 @@
                                 </div>
                                 <div>
                                 <div> <%= poll.description%> </div>
-                                <div> <%= poll.created_at%> </div>
+                                <div> <%= poll.created_at.to_date%> </div>
                                 <div> <%= poll.end_date%> </div>
                                 <% if poll.is_released %>
                                     <div>Released</div>
