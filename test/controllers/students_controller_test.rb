@@ -7,14 +7,13 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
 
 
   test "should get index" do
-    get :index
-    assert_response :success
+    get '/index'
+    assert_response :redirect
   end
 
 
-
   test "should get show" do
-    get :show
-    assert_response :success
+    get '/show'
+    assert_response :redirect
   end
 end

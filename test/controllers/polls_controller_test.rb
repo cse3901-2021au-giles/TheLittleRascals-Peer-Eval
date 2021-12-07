@@ -12,13 +12,13 @@ class PollsControllerTest < ActionController::TestCase
 
   test "should get create" do
     @poll = polls(:one)
-    get :new
+    post polls_path, params: {id: @poll.id }
     assert_response :success
   end
 
   test "should get show_polls" do
     @poll = polls(:one)
-    get :new
+    get :show_polls, params: {id: @poll.id }
     assert_response :success
   end
 

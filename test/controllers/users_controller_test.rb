@@ -6,24 +6,28 @@ class UsersControllerTest < ActionController::TestCase
   # end
 
   setup do
-    @user = users{:one}
+    @user = users(:one)
   end
 
   test "should get new" do
-    get :new
+    
+    get :new, params: { id: @user.id }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, params: {param: @user}
+
+    get :edit, params: {fname: 'MyString',
+    lname: 'MyString', email: 'MyString', password_digest: 'MyString', admin: false}
     assert_response :success
   end
 
   test "should get update" do
-    get :login_path 
+    get :update 
     assert_response :success
   end
 
 
 
 end
+ 

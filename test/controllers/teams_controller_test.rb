@@ -6,12 +6,11 @@ class TeamsControllerTest < ActionController::TestCase
   # end
 
   setup do
-    @teams = teams(:one)
-    @user = users(:one)
+    @team = teams(:one)
   end
 
   test "should get new" do
-    get :new, params: {param: @user}
+    get :new
     assert_response :success
   end
 end
