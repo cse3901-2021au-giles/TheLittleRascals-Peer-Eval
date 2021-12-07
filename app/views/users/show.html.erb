@@ -156,11 +156,15 @@
                     <td><%=@user.teams.where(project_id: poll.project_id).first.name%></td>
                     <td><%= poll.description%></td>
                     <td><%= poll.end_date %></td>
-                    <%if @user.pollings.where(poll_id: poll.id).first.is_complete%>
-                    <td> Completed </td>
-                    <%else%>
-                    <td><%= button_to "Complete Activity", new_result_path, method: :get, params: {:project_id => poll.project_id, :team_id => @user.teams.where(project_id: poll.project_id).first.id, :poll_id => poll.id}, class: "btn btn-normal"%>  </td>
-                    <%end%>
+                         <%if @user.pollings.where(poll_id: poll.id).first.is_complete%>
+                              <%if poll.is_released%>
+                              <td><%= button_to "View Results", "/view-single-result", method: :get, params: {:poll_id => poll.id, :project_id => poll.project_id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+                              <%else%>
+                              <td>Completed/Not Released</td>
+                              <%end%>
+                         <%else%>
+                              <td><%= button_to "Complete Activity", new_result_path, method: :get, params: {:project_id => poll.project_id, :team_id => @user.teams.where(project_id: poll.project_id).first.id, :poll_id => poll.id}, class: "btn btn-normal"%>  </td>
+                         <%end%>
                
                     <%end %>
                     </tr>
@@ -188,7 +192,12 @@
                     <td><%=@user.teams.where(project_id: poll.project_id).first.name%></td>
                     <td><%= poll.description%></td>
                     <td><%= poll.end_date %></td>
-                    <td><%= button_to "View Results", "/view-results", method: :get, params: {:project_id => poll.project_id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+                    <%if poll.is_released%>
+                    <td><%= button_to "View Results", "/view-single-result", method: :get, params: {:poll_id => poll.id, :project_id => poll.project_id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+                    <%else%>
+                    <td>Completed/Not Released</td>
+                    <%end%>
+                    
 
                     <%end %>
                     </tr>
