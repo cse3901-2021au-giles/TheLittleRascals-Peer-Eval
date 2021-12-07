@@ -1,10 +1,11 @@
 class PollsController < ApplicationController
+    # Prepare the fields so that we can make a new poll
     def new
         @group_id = params[:group_id]
         @project_id = params[:project_id]
         @poll = Poll.new
     end
-
+    # Get all the params and and default to unreleased
     def create
         @poll = Poll.new(poll_params)
         @poll.group_id = params[:group_id]
@@ -12,7 +13,7 @@ class PollsController < ApplicationController
         @time_till_close = params[:time]
         @poll.is_released = false
         @poll.end_date = Date.today + @time_till_close.to_i
-
+        # If no error is thrown, save all fields, assign members and notify them by email
         if @poll.save
             @project = Project.find(params[:project_id])
             @teams = @project.teams
@@ -24,9 +25,10 @@ class PollsController < ApplicationController
                     @polling.user_id = team_member.id
                     @polling.is_complete = false
                     @polling.save
+                    # Send the email to notify new assignment
                     email = team_member.email
                     puts `\npython3 smtp.py #{email} "3"`
-
+                    # Fill in the default fields
                     @team_members.each do |team_mate|
                         @result = Result.new
                         @result.poll_id = @poll.id
@@ -46,13 +48,14 @@ class PollsController < ApplicationController
             render :new
         end 
     end 
-
+    # We dont want the general view, but a specific view of one poll
     def show_single_poll
         
         @user = User.find(session[:current_user])
         if @user.admin
             return redirect_to user_path(session[:current_user]), notice: "You do not have the right to view the page"
-        end 
+        end
+        # Set all fields to default value
         @project = Project.find(params['project_id'])
         @team = Team.find(Result.where(poll_id: params['poll_id'], rater_id: @user.id).first.team_id)
         @group = Group.find(params['group_id'])
@@ -62,6 +65,7 @@ class PollsController < ApplicationController
         @has_team_total = false
         @curr_user_ave = 0
         @has_curr_user_ave = false
+        # Get each user and increment appropriate counts and averages/scores
         @team.users.each do |user|
             @ave = calculate_ave(@poll.id, user.id)
             if @ave
@@ -81,7 +85,7 @@ class PollsController < ApplicationController
         @comments = Result.where(poll_id: @poll.id, ratee_id: @user.id, is_complete: true)
     end 
 
-
+    # Merely show the poll, dont update or change anything
     def show_polls
         @project = Project.find(params['project_id'])
         @teams = @project.teams
@@ -102,19 +106,20 @@ class PollsController < ApplicationController
         end
         @user = User.find(session[:current_user])
     end 
-
+    # Get the poll by user assignment and then release it.
     def edit 
         @poll = Poll.find(params[:id])
         @poll.update_attribute(:is_released, true)
         return redirect_back(fallback_location: user_path(session[:current_user])), notice: "Poll is released"        
     end 
-
+    # Only calculate if it is complete, then save this computation
     def calculate_ave(poll_id, ratee_id)
 
         @result = Result.where(poll_id: poll_id, ratee_id: ratee_id, is_complete: true)
         @result = @result.average(:score)
         return @result
     end
+    # Ensure all is filled out
     def poll_params
         params.require(:poll).permit(:description)
     end
