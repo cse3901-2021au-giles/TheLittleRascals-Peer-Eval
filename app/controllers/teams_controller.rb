@@ -11,10 +11,10 @@ class TeamsController < ApplicationController
     # We want to create a group either manually or by computer
     def create
         @group_id = params[:group_id]
+
         @project_id = params[:project_id]
         # Cant make a team without members. If not 0, they want the cpu to make the teams
         if params[:team_size].length != 0
-
             @team_size = params[:team_size]
             @group = Group.find(@group_id)
             @users = @group.users.where.not(admin: true).ids

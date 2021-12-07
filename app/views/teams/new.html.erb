@@ -32,7 +32,13 @@
     </div>
     <%= label_tag "Method 1. Autometically Generate Team by Team Size (leave blank for method 2)"%>
     <br>
-    <%= text_field_tag :team_size, params[:team_size], placeholder: "default = 3"%>
+    <%#f.select(:team_size, @group.users) %>
+
+
+    <%=select(:team_size, [1..@group.users.length], {prompt: 'Select'}
+       )%>
+
+    <%#= text_field_tag :team_size, params[:team_size], placeholder: "default = 3"%>
     <br>
     <%= label_tag "Method 2. Enter By Hand"%>
     <br>
