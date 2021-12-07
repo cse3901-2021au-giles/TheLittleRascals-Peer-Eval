@@ -9,16 +9,16 @@ class UsersController < ApplicationController
     def index
         @user = User.all
     end
-
-    
+    # This from the create account page and also when the teacher is adding a new student.
     def create 
         @user = User.new(user_params)
-        exists_error = "This email is already in use! Please sign in."
+
+        # If the user already exists, we dont want to duplicate their account so redirect to login
         exists_error_at_create = "This student is already created."
         if User.exists?(email: @user.email) && session[:current_user]
             return redirect_to user_path(session[:current_user]), notice: exists_error_at_create
         end 
-
+        # We want to check their password to make sure that it is strong. If not, dont move on
         alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         sym = "~`!@#$%^&*()_+-={[}]|\\:;"'<,>.?/'"`"
         num = "1234567890"
@@ -28,12 +28,12 @@ class UsersController < ApplicationController
           password.count(sym) < 1 or password.count(num) < 1
             return render :new
         end
-        
+        # If the checkbox is filled, make the account an admin
         if user_params['admin'] == 1
             @user.admin = true
         end 
         
-
+        # If the teacher created the account send the correct email, otherwise send default creation email
         if params[:temp_user]
             @user.temp_user = true
             @user.password = "ToBeReset"
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
             email = @user.email
             puts `\npython3 smtp.py #{email} "2"`
         end 
-
+        # Save the user and redirect, if teacher signed you up. Fill in the group fields
         if @user.save
             if @user.temp_user
 
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
         else
             render :new
         end
-
+        # If the user is the administrator and doesnt have a group, make a group of one
         if @user.admin && !params[:has_group]
             @group = Group.new
 
@@ -78,12 +78,12 @@ class UsersController < ApplicationController
             @grouping.save
         end 
     end 
-
+    # First find the current user and then fill in their new params
     def edit
         @user = :current_user 
         @user_info = User.find(session[:current_user])
-    end 
-
+    end
+    # Make sure that it is a session and only then do you update params
     def update
         return redirect_to login_path unless session[:current_user]
 
@@ -95,7 +95,7 @@ class UsersController < ApplicationController
             redirect_to "/users/#{@user.id}/edit"
         end
     end
-
+    # We only show if the user is valid and logged in
     def show
         if params[:id].to_i != session[:current_user].to_i
             redirect_to login_path, notice: "You are not logged in"
@@ -112,16 +112,17 @@ class UsersController < ApplicationController
             end 
         end
     end 
-
+    # This will delete the account
     def destroy
         User.find(params[:id]).destroy
         redirect_to user_path(session[:current_user]), notice: "Student deleted"
-    end 
+    end
+    # This gathers and enforces the parameters in the front-end forms
     private
     def user_params
         params.require(:user).permit(:fname, :lname, :email, :password, :admin, :group)
     end 
-
+    # Make sure all of the params are there
     def update_params
         params.require(:current_user).permit(:fname, :lname, :email, :password)
     end 
