@@ -44,10 +44,11 @@ rails server
 ```
 You should now see:
 ```
+...
 * Listening on http://127.0.0.1:3000
 * Listening on http://[::1]:3000
 ```
-or something similar. Click the link and you will be taken to your default browser, or just type in "loaclhost:3000" in your browser, replacing 3000 with the port specified. Enjoy!
+or something similar. Click the link and you will be taken to your default browser, or just type in "localhost:3000" in your browser, replacing 3000 with the port specified. Enjoy!
 
 ## User Views
 * Login Page: This page is for introducing the site and for logging in. This page contains a place to input email and password and also a place to input email if you forget your password.
