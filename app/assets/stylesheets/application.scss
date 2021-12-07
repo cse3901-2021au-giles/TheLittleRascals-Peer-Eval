@@ -16,6 +16,10 @@
 
 @import "bootstrap/scss/bootstrap";
 
+.table-scroll{
+    overflow: scroll;
+}
+
  .notice {
     color: white;
     position: fixed;
@@ -67,7 +71,21 @@
 .table{
     background-color: #b5bdc2;
 }
+.table-plain{
+    background-color: none !important;
+    color: none !important;
+}
+.table-show td{
+    overflow: scroll;
+}
 
+.table-show-2{
+    background-color: #b5bdc2 !important;
+}
+
+.bottom-border{
+    border-bottom: 1px solid #4b5b66
+}
 .padding-show-2{
     padding-left: 10%;
     padding-right: 10%;

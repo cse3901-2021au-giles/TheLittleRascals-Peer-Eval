@@ -49,8 +49,8 @@
 
 
      <div class="padding-show-2  table-show">
-          <div class="font-normal bold font20">Your Projects</div>
-          <table class="table font14">
+          <div class="font-normal bold font20 ">Your Projects</div>
+          <table class="table table-hover font14">
                     <tr>
                          <th>Name</th>
                          <th>Descript</th>
@@ -76,28 +76,31 @@
                               <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal invisible"%></td>
                               <td><%= button_to "Create Teams", new_team_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal invisible"%></td>
                               <% else%>
-                              <td><%= button_to "View Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+                              <td><%= button_to "View/Modify Teams", "/view-teams", method: :get, params: {:project_id => project.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
                               <td><%= button_to "Send New Poll", new_poll_path, method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
                               <td><%= button_to "View Results", "/view-results", method: :get, params: {:project_id => project.id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
                          <%end%>
                     </tr>
                <% end %>
           </table>
-          <div class="font-normal bold font20">Your Students</div>
-          <table class="table ">
+          <div class="font-normal bold font20 ">Your Students</div>
+          <table class="table table-hover  table-scroll">
                     <tr>
-                         <th>Status</th>
+                         
+                         <th>User Id</th>
                          <th>First Name</th>
                          <th>Last Name</th>
                          <th>Email</th>
                          <th>Role</th>
+                         <th>Status</th>
                          <th>Action</th>
                     </tr>
                <% @group.users.each do |student|%>
                     <tr class="">  
                     
+
                          <td>
-                              <div><%= student.temp_user ? "Inactive" : "Active"%></div>
+                              <div><%= student.id%></div>
                          </td>
                          <td>
                               <div><%= student.fname%></div>
@@ -114,6 +117,9 @@
                                         Admin
                                    <% end %>
                               </div>
+                         </td>
+                         <td>
+                              <div><%= student.temp_user ? "Inactive" : "Active"%></div>
                          </td>
                          <td>
                               <% if student.id != @user.id && @group.owner != student.id%>
@@ -137,7 +143,7 @@
                <div class="font-all-2">Opening Polls</div>
 
 
-               <table class="poll top-space-ss table font14">
+               <table class="poll table-hover top-space-ss table font14">
                     <tr>
                          <th> Group</th>
                          <th> Project</th>
@@ -156,11 +162,15 @@
                     <td><%=@user.teams.where(project_id: poll.project_id).first.name%></td>
                     <td><%= poll.description%></td>
                     <td><%= poll.end_date %></td>
-                    <%if @user.pollings.where(poll_id: poll.id).first.is_complete%>
-                    <td> Completed </td>
-                    <%else%>
-                    <td><%= button_to "Complete Activity", new_result_path, method: :get, params: {:project_id => poll.project_id, :team_id => @user.teams.where(project_id: poll.project_id).first.id, :poll_id => poll.id}, class: "btn btn-normal"%>  </td>
-                    <%end%>
+                         <%if @user.pollings.where(poll_id: poll.id).first.is_complete%>
+                              <%if poll.is_released%>
+                              <td><%= button_to "View Results", "/view-single-result", method: :get, params: {:poll_id => poll.id, :project_id => poll.project_id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+                              <%else%>
+                              <td>Completed/Not Released</td>
+                              <%end%>
+                         <%else%>
+                              <td><%= button_to "Complete Activity", new_result_path, method: :get, params: {:project_id => poll.project_id, :team_id => @user.teams.where(project_id: poll.project_id).first.id, :poll_id => poll.id}, class: "btn btn-normal"%>  </td>
+                         <%end%>
                
                     <%end %>
                     </tr>
@@ -169,7 +179,7 @@
           </div>
           <div class="padding-show-2 table-show">
                <div class="font-all-2 top-space">Closed Polls</div>
-                    <table class="poll top-space-ss table font14">
+                    <table class="poll table-hover top-space-ss table font14">
                     <tr>
                          <th> Group</th>
                          <th> Project</th>
@@ -188,7 +198,12 @@
                     <td><%=@user.teams.where(project_id: poll.project_id).first.name%></td>
                     <td><%= poll.description%></td>
                     <td><%= poll.end_date %></td>
-                    <td><%= button_to "View Results", "/view-results", method: :get, params: {:project_id => poll.project_id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+                    <%if poll.is_released%>
+                    <td><%= button_to "View Results", "/view-single-result", method: :get, params: {:poll_id => poll.id, :project_id => poll.project_id, :group_id => @user.groups.first.id, :user_id => @user.id}, class: "btn btn-normal"%></td>
+                    <%else%>
+                    <td>Completed/Not Released</td>
+                    <%end%>
+                    
 
                     <%end %>
                     </tr>

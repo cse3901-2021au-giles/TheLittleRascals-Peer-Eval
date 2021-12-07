@@ -1,3 +1,7 @@
+<%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
+<% if notice%>
+    <p class="notice flex center"><%= notice %> </p>
+<%end%>
 <div class=" header v-center space-between flex padding-show">
     <div class="flex">
         <div class="font-all ">
@@ -33,24 +37,41 @@
                     <tr class="">  
                 
                         <td class="right-border">
-                            <div class="flex font20"> 
-                                Team: <%= team.name%>
-                                <br />
-                                Description: <%= team.description%>
+                            <div class="flex font-all-2"> 
+                                <div>
+                                <div>Team: </div>
+                                
+                                <div>Description: </div>
+                                <div> <%= button_to "Modify Team", "/modify_team", method: :get, params: {:team_id => team.id, :project_id => @project.id}, class: "btn btn-normal"%></div>
+                                </div>
+                                <div>
+                                 <div><%= team.name%></div>
+                                 <div><%= team.description%></div>
+                                </div>
                             </div>
                         </td>
-                        <td>
-                            <div class="font20">                            
+                        <td >
+                            <table  class="table table-sm table-hover">   
+                                <tr class="bottom-border bold">
+                                    <td>Id</td>
+                                    <td>First Name</td>
+                                    <td>Last Name</td>
+                                    <td>Email</td>
+                                </tr>       
                                 <% team.users.each do |member|%>
-                                    <div class="flex">
-                                        <div><%= member.fname%></div>
-                                        &nbsp
-                                        <div><%= member.lname%></div>
-                                        &nbsp | &nbsp
-                                        <div><%= member.email%></div>
-                                    </div>
+                                
+                                <tr>
+                                    <td class="table-show-2"> <%=member.id%></td>
+                                   <td class="table-show-2">
+                                        <%= member.fname%></td>
+                                <td class="table-show-2">
+                                    <%= member.lname%></td>
+                                
+                                    <td class="table-show-2"><%= member.email%></td>
+                                    
+                                    </tr>
                                 <%end%>
-                            </div>
+                            </table>
                         </td>
                     </tr>
                 <%end%>

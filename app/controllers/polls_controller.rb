@@ -10,7 +10,7 @@ class PollsController < ApplicationController
         @poll.group_id = params[:group_id]
         @poll.project_id = params[:project_id]
         @time_till_close = params[:time]
-
+        @poll.is_released = false
         @poll.end_date = Date.today + @time_till_close.to_i
 
         if @poll.save
@@ -47,6 +47,41 @@ class PollsController < ApplicationController
         end 
     end 
 
+    def show_single_poll
+        
+        @user = User.find(session[:current_user])
+        if @user.admin
+            return redirect_to user_path(session[:current_user]), notice: "You do not have the right to view the page"
+        end 
+        @project = Project.find(params['project_id'])
+        @team = Team.find(Result.where(poll_id: params['poll_id'], rater_id: @user.id).first.team_id)
+        @group = Group.find(params['group_id'])
+        @poll = Poll.find(params['poll_id'])
+        @team_total = 0
+        @valid_user_count = 0
+        @has_team_total = false
+        @curr_user_ave = 0
+        @has_curr_user_ave = false
+        @team.users.each do |user|
+            @ave = calculate_ave(@poll.id, user.id)
+            if @ave
+                if user.id == @user.id
+                    @curr_user_ave = @ave
+                    @has_curr_user_ave = true
+                end
+                @has_team_total = true
+                @team_total += @ave
+                @valid_user_count += 1
+            end 
+        end 
+        if @has_team_total
+            @team_ave = @team_total/@valid_user_count
+        end 
+
+        @comments = Result.where(poll_id: @poll.id, ratee_id: @user.id, is_complete: true)
+    end 
+
+
     def show_polls
         @project = Project.find(params['project_id'])
         @teams = @project.teams
@@ -66,6 +101,12 @@ class PollsController < ApplicationController
             @results_dict[poll.id] = @team_dict
         end
         @user = User.find(session[:current_user])
+    end 
+
+    def edit 
+        @poll = Poll.find(params[:id])
+        @poll.update_attribute(:is_released, true)
+        return redirect_back(fallback_location: user_path(session[:current_user])), notice: "Poll is released"        
     end 
 
     def calculate_ave(poll_id, ratee_id)

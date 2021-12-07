@@ -1,0 +1,78 @@
+<%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
+<% if notice%>
+    <p class="notice flex center"><%= notice %> </p>
+<%end%>
+<div class=" header v-center space-between flex padding-show">
+    <div class="flex">
+        <div class="font-all ">
+            Modify Team
+        </div>
+
+    </div>
+
+</div>
+
+<% if @user.admin %>
+<div class="padding-show-2 top-space ">
+
+<div class="font-all-2">
+<%= form_for @team do |f| %>
+    <%= f.label :Team_Name %>
+    <br>
+    <%= f.text_field :name, value:@team.name, :required =>  true%>
+    <br>
+    <%= f.label :Team_Description %>
+    <br >
+    <%= f.text_field :description, value:@team.description, :required =>  true%>
+    <br>
+    <%= hidden_field_tag(:project_id, @project.id)%>
+    <%= f.submit "Save Changes", class: "btn btn-all top-space" %>
+
+    <% end %>
+    </div>
+        <div class="font-all-2 top-space">Team Members</div>
+          <table class="table table-hover font-normal table-sm table-scroll">
+                    <tr>
+                         
+                         <th>User Id</th>
+                         <th>First Name</th>
+                         <th>Last Name</th>
+                         <th>Email</th>
+                         <th>Status</th>
+                         <th>Team Assignment</th>
+                    </tr>
+               <% @team.users.each do |student|%>
+                    <%if !student.admin%>
+                    <tr class="">  
+                
+                         <td>
+                              <div><%= student.id%></div>
+                         </td>
+                         <td>
+                              <div><%= student.fname%></div>
+                         </td>
+                         <td>
+                              <div><%= student.lname%></div>
+                         </td>
+                         <td>
+                              <div><%= student.email%></div>
+                         </td>
+                         <td>
+                              <div><%= student.temp_user ? "Inactive" : "Active"%></div>
+                         </td>
+                         <td>  
+                         <%if student.teams.where(project_id: @project.id).first %>
+                              <div><%= student.teams.where(project_id: @project.id).first.name%> </div>
+                        <%else%>
+                            <div class="red">No Assignment Found</div>
+                            <%end%>
+                         </td>
+                    </tr>
+                    <%end%>
+               <% end %>
+          </table>
+</div>
+
+<%else%>
+<div>Action denied, you do not have the rights to view this page</div>
+<%end %>

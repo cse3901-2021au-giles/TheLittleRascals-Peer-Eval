@@ -9,25 +9,86 @@
 
     </div>
 
-<div class="padding top-space font-all-2">
+<div class="padding-show-2 top-space font-all-2" >
+    <div class="flex font-all-2">
+        <div>  
+            <div> Project Name: </div>
+            <div> Project Description:</div>
+        
+        </div>
+        <div class="left-space-ll">
+            <div> <%= @project.name%> </div>
+            <div> <%= @project.description%> </div>
+            
+        </div>
+    </div>
+<div class="red top-space bottom-space">You can modify team name and descriptions later</div>
 <%= form_for @team do |f| %>
-    <%= f.label :name %>
-    <br>
-    <%= f.text_field :name, :required =>  true%>
-    <br>
-    <%= f.label :description %>
-    <br>
-    <%= f.text_field :description, :required =>  true%>
-    <br>
+
+    
     <div class="none">
     <%= hidden_field_tag(:group_id, @group_id)%>
     <%= hidden_field_tag(:project_id, @project_id)%>
     </div>
-    <%= label_tag "Team Size"%>
+    <%= label_tag "Method 1. Autometically Generate Team by Team Size (leave blank for method 2)"%>
     <br>
-    <%= text_field_tag :team_size, params[:team_size], :required =>  true%>
+    <%= text_field_tag :team_size, params[:team_size], placeholder: "default = 3"%>
+    <br>
+    
+    <%= label_tag "Method 2. Enter By Hand"%>
+    <br>
+    <%= text_field_tag :team_members, params[:team_members], placeholder: "23 23 | 67 483 | 45 ..."%>
     <br>
     <%= f.submit "Generate Teams", class: "btn btn-all top-space"%>
 
 <% end %>
+
+
+
 </div>
+
+
+<div class="font-all-2 padding-show-2 top-space">Your Student</div>
+<div class="padding-show-2">
+          <table class="table  table-hover font-normal table-sm table-scroll">
+                    <tr>
+                         
+                         <th>User Id</th>
+                         <th>First Name</th>
+                         <th>Last Name</th>
+                         <th>Email</th>
+                         <th>Status</th>
+                         <th>Team Assignment</th>
+                    </tr>
+               <% @group.users.each do |student|%>
+                    <%if !student.admin%>
+                    <tr class="">  
+                
+                         <td>
+                              <div><%= student.id%></div>
+                         </td>
+                         <td>
+                              <div><%= student.fname%></div>
+                         </td>
+                         <td>
+                              <div><%= student.lname%></div>
+                         </td>
+                         <td>
+                              <div><%= student.email%></div>
+                         </td>
+                         <td>
+                              <div><%= student.temp_user ? "Inactive" : "Active"%></div>
+                         </td>
+                         <td>  
+                         <%if student.teams.where(project_id: @project_id).first %>
+                              <div><%= student.teams.where(project_id: @project_id).first.name%> </div>
+                        <%else%>
+                            <div class="red">No Assignment Found</div>
+                            <%end%>
+                         </td>
+                    </tr>
+                    <%end%>
+               <% end %>
+          </table>
+
+          </div>
