@@ -23,7 +23,7 @@ class TeamsController < ApplicationController
             # Gather the correct fields for the db
             @team_splits.length.times do |i|
                 @team_members = @team_splits[i]
-                @team = Team.new(team_params)
+                @team = Team.new
                 @team.name = LiterateRandomizer.word
                 @team.description = "Random description for the team"
                 @team.group_id = @group_id
