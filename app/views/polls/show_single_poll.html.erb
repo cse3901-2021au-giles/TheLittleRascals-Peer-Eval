@@ -1,0 +1,40 @@
+<div class=" header v-center space-between flex padding-show">
+    <div class="flex">
+        <div class="font-all ">
+            View Poll Result
+        </div>
+    </div>
+</div>
+<div class="padding top-space font-all-2 flex">
+
+         <div>  
+            <div> Group: </div>
+            <div> Project:</div>
+            <div>Team: </div>
+            <div>Poll: </div>
+            <div>Your Average: </div>
+            <div>Your Team's Average: </div>
+            <div>Comments from Your Teammate (Anomalous): </div>
+        </div>
+        <div class="left-space-ll">
+               <div><%=@group.name%></div>
+                <div><%=@project.name%></div>
+                <div><%=@team.name%></div>
+                <div><%=@poll.description%></div>
+
+                <% if @has_curr_user_ave %>
+                    <div class="red"><%=@curr_user_ave%></div>
+                <%else%>
+                    <div class="red">No Response</div>
+                <%end%>
+                <% if @has_team_total %>
+                    <div class="red"><%=@team_ave%></div>
+                <%else%>
+                    <div class="red">No Response</div>
+                <%end%>
+                <%for comment in @comments%>
+                    <div><%=comment.comment%></div>
+                <%end%>
+                
+        </div>
+</div>

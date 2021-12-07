@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :projects
    get '/view-teams', to: 'teams#show_teams'
    get '/view-results', to: 'polls#show_polls'
+   get '/view-single-result', to: 'polls#show_single_poll'
   match '*path' => redirect('/login'), via: :get
   match '/' => redirect('/login'), via: :get
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
