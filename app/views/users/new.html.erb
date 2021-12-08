@@ -20,6 +20,8 @@ name, last name, email, password, and group name. %>
 </div>
 
 <div class="padding font-all-2 top-space">
+<div class="red">Password must contain an uppercase letter, a symbol, a number and be 8 in length.</div>
+
 <% if @is_temp_user %>
 <%= form_for @user do |f| %>
     <%= f.label :First_Name %>

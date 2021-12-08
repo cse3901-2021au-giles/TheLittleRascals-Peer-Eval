@@ -8,12 +8,22 @@ class TeamsController < ApplicationController
         @user = User.find(session[:current_user])
         @team = Team.new
     end
+
+    def is_int(input)
+        true if Integer(input) rescue false
+    end 
+
     # We want to create a group either manually or by computer
     def create
         @group_id = params[:group_id]
         @project_id = params[:project_id]
+        @group = Group.find(@group_id)
+        @count = @group.users.count
         # Cant make a team without members. If not 0, they want the cpu to make the teams
         if params[:team_size].length != 0
+            if !is_int(params[:team_size]) || params[:team_size].to_i < 1 || params[:team_size].to_i > @count
+                return redirect_to user_path(session[:current_user]), notice: "Team size can only be integer between 1 and total number of student in your group!"
+            end 
 
             @team_size = params[:team_size]
             @group = Group.find(@group_id)

@@ -8,6 +8,11 @@ class ResultsController < ApplicationController
         @team = Team.find(params[:team_id])
         @user = User.find(session[:current_user])
     end 
+
+    def is_int(input)
+        true if Integer(input) rescue false
+    end 
+
     # This is the code called when a user is filling out the form itself
     def create
         
@@ -20,7 +25,9 @@ class ResultsController < ApplicationController
             @ratee_score = params[:"score_#{user.id}"]
             @ratee_comment = params[:"comment_#{user.id}"]
             @ratee_id = user.id
-
+            if !is_int(@ratee_score) || @ratee_score.to_i < 0 || @ratee_score.to_i >100
+                return redirect_to user_path(session[:current_user]), notice: "You must enter an integer between 0-100 for score!"
+            end 
             @result = Result.where(rater_id: @rater_id, ratee_id: @ratee_id, poll_id: @poll_id).first
             # @result.poll_id = @poll_id
             # @result.team_id = @team_id
