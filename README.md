@@ -52,7 +52,7 @@ or something similar. Click the link and you will be taken to your default brows
 
 ## Other Technical Issues
 * Subject to your local environment and the version of required dependencies you are running, it is very common to encounter errors during build process. Please contact the owner (zhong.523@osu.edu) to resolve any issue you have.
-###Possible Issues
+### Possible Issues
 * WebPacker not running correctly: bundle exec rake webpacker:install
 * Database not loading: rails db:schema:load
 
