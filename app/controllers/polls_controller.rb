@@ -5,12 +5,20 @@ class PollsController < ApplicationController
         @project_id = params[:project_id]
         @poll = Poll.new
     end
+
+    def is_int(input)
+        true if Integer(input) rescue false
+    end 
     # Get all the params and and default to unreleased
     def create
         @poll = Poll.new(poll_params)
         @poll.group_id = params[:group_id]
         @poll.project_id = params[:project_id]
         @time_till_close = params[:time]
+        if !is_int(@time_till_close) || @time_till_close.to_i < 0
+            return redirect_to user_path(session[:current_user]), notice: "You must enter an positive integer for poll close date!"
+        end 
+
         @poll.is_released = false
         @poll.end_date = Date.today + @time_till_close.to_i
         # If no error is thrown, save all fields, assign members and notify them by email

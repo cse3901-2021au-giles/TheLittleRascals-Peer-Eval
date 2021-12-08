@@ -14,10 +14,19 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
 
         # If the user already exists, we dont want to duplicate their account so redirect to login
-        exists_error_at_create = "This student is already created."
+        exists_error_at_create = "This student is already created but we have added them to your group!"
         if User.exists?(email: @user.email) && session[:current_user]
+            @grouping = Grouping.new
+            @grouping.group_id = params[:group_id]
+            @grouping.user_id = @user.id
+            @grouping.save
             return redirect_to user_path(session[:current_user]), notice: exists_error_at_create
         end 
+
+        if User.exists?(email: @user.email)
+            return redirect_to login_path, notice: "User already exist please login"
+        end 
+
         # We want to check their password to make sure that it is strong. If not, dont move on
         alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         sym = "~`!@#$%^&*()_+-={[}]|\\:;"'<,>.?/'"`"
