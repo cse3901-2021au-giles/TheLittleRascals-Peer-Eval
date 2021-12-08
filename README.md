@@ -50,13 +50,15 @@ You should now see:
 ```
 or something similar. Click the link and you will be taken to your default browser, or just type in "localhost:3000" in your browser, replacing 3000 with the port specified. Enjoy!
 
-## User Views
+## Views (Student & Admin)
 * Login Page: This page is for introducing the site and for logging in. This page contains a place to input email and password and also a place to input email if you forget your password.
-* Account Landing Page: Your dashboard is here and differs if you're an admin or a regular user. For admins, you can see the projects (classes) and the students in your classes. From here you can also add students or add groups. For regular users, the interface looks very similar except you have your opened polls, closed polls , and your team assignments. Both have a welcome message with basic account information, a place to update your profile, and a button to log out.
+* Account Landing Page: Your dashboard is here and differs if you're an admin or a regular user. For admins, you can see the projects (classes) and the students in your classes. From here you can also add students or add projects (see below). For regular users, the interface looks very similar except you have your opened polls, closed polls , and your team assignments. Both have a welcome message with basic account information, a place to update your profile, and a button to log out.
 * Update Profile: All users are able to edit their first and last name, email, and password on this page.
 * Polls: Admins are able to create polls for each project (class) and send them out to all members of that project. These polls with allow users (students) to rate and comment their groupmates. Since the polls for the students show up on their landing page, they just need to select the poll and submit when done.
 * View Results Page: Admins are able to view the results of the polls they send out. Regular users are also able to view the results of the polls they've completed, as well as the rating and comments they had received from their teammates.
-* View Teams Page: For each project (class), admins are able to view the teams: the name of the team, its description, and its members.
+* View Teams Page: For each project (class), admins are able to view the teams: the name of the team, its description, and its members and also be able to modify the team names
+* Forget password page: In this page, you can enter your email to receieve a temp password in order for you to log back in.
+* Projects: A project belongs to a group, has many teams and polls and can only be created by an admin. Admins can click Add Project to add a new project and click create teams to create respective teams
 
 ---
 ##### Coded by Jack Burgdoerfer, Joseph Hilber, Ashwin Nair, Jiahui Xu, and Jike Zhong
