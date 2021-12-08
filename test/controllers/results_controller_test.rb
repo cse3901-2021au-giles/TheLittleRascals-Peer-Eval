@@ -5,9 +5,16 @@ class ResultsControllerTest < ActionController::TestCase
   #   assert true
   # end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
+  # test "should get new" do
+  #   get :new
+  #   assert_response :success
+  # end
+
+
+  # test "should get create" do
+  #   @post = results(:one)
+  #   get :create, params: {id: @post}
+  #   assert_response :success
+  # end
   
 end
