@@ -50,7 +50,7 @@ You should now see:
 ```
 or something similar. Click the link and you will be taken to your default browser, or just type in "localhost:3000" in your browser, replacing 3000 with the port specified. Enjoy!
 
-### Live Site
+### Live Site on Heroku
 * Please visit https://sudo-peer-evaluation-tool.herokuapp.com/ 
 
 ## Other Technical Issues
