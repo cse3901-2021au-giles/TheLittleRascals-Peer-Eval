@@ -1,3 +1,9 @@
+<%# This page shows the user's landing page. Both admins and non-admins can
+view this page. It includes the main info for each user, such as polls to
+complete, polls that are completed, and projects and their names. This page
+serves as a portal to all other places on the site the logged-in user may need
+to access. %>
+
 <%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
 <% if notice%>
     <p class="notice flex center"><%= notice %> </p>
