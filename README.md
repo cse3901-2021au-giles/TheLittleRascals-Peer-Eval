@@ -3,9 +3,9 @@
 ## Introduction
 This Ruby on Rails project is a peer evaluation tool created by The Little Rascals. Peer evaluations are crucial to anybody working in a team and this tool makes it easy to praise teammates, bring up any issues, and, if you are an administrator, oversee your groups to keep track of their strengths and weaknesses.
 
-## Features
+## Key Features
 * Administrator privileges to create, edit, delete, and monitor groups and users
-* Surveys for each group member to evaluate their team(s)
+* Surveys for each group member to evaluate their team(s) and for the admins to view the results
 * Easy account, project, and team creation for admins
 * Clean and simple user interface
 * Admin ability to email the group members information about finishing forms
@@ -49,6 +49,12 @@ You should now see:
 * Listening on http://[::1]:3000
 ```
 or something similar. Click the link and you will be taken to your default browser, or just type in "localhost:3000" in your browser, replacing 3000 with the port specified. Enjoy!
+
+## Other Technical Issues
+* Subject to your local environment and the version of required dependencies you are running, it is very common to encounter errors during build process. Please contact the owner (zhong.523@osu.edu) to resolve any issue you have.
+###Possible Issues
+* WebPacker not running correctly: bundle exec rake webpacker:install
+* Database not loading: rails db:schema:load
 
 ## Views (Student & Admin)
 * Login Page: This page is for introducing the site and for logging in. This page contains a place to input email and password and also a place to input email if you forget your password.
