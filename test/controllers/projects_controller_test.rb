@@ -11,15 +11,17 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # test "should get create" do
-  #   @post = projects(:one)
-  #   get :create, params: {id: @post}, post = {polls}
-  #   assert_response :success
-  # end
-
   test "should get show" do
-    get :show
+    test_project_id = 1
+    test_user_id = 1
+
+    get :new, params: {id: test_project_id}
     assert_response :success
+  end
+
+  test "should get destroy" do
+   get :new
+   assert_response :success
   end
 
 

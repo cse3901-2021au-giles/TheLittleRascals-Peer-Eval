@@ -15,7 +15,7 @@ class StudentsControllerTest < ActionController::TestCase
 
 
   test "should get show" do
-    get :show
+    get :index
     assert_response :success
   end
 

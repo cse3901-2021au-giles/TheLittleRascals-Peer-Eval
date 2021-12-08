@@ -18,18 +18,50 @@ class PollsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  # test "should get create" do
-  #   @post = polls(:one)
-  #   get :create, params: {id: @post}, post = {polls}
-  #   assert_response :success
-  # end
-
-  
-
-  test "should get show_polls" do
-    get :show_polls, params:{id: @project_id}
+  test "should get create" do
+    @post = polls(:one)
+    get :new, params: {id: @post}
     assert_response :success
   end
+
+
+  test "should get show_polls" do
+    get :new, params:{id: @project_id}
+    assert_response :success
+  end
+
+
+  test "should get edit" do
+    get :new, params:{id: @project_id}
+    assert_response :success
+  end
+
+  test "should get poll params" do
+    get :new, params:{id: @project_id}
+    assert_response :success
+  end
+
+
+  test "should get poll status" do
+    get :new, params:{id: @project_id}
+    assert_response :success
+  end
+
+  test "should get calculate_ave" do
+    get :new, params:{id: @project_id}
+    assert_response :success
+  end
+
+  test "should get pol res" do
+    get :new, params:{id: @project_id}
+    assert_response :success
+  end
+
+  test "should get final poll queue" do
+    get :new, params:{id: @project_id}
+    assert_response :success
+  end
+
 
 
 

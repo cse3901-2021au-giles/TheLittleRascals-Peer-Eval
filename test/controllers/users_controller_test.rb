@@ -16,23 +16,23 @@ class UsersControllerTest < ActionController::TestCase
   end
 
 
-  # test "should get index" do
-  #   get :index
-  #   assert_response :success
-  # end
+  test "should get index" do
+    get :new, params: {id: @user}
+    assert_response :success
+  end
 
-  # test "should get create" do
-  #   get :create, params: {id: @user}
-  #   assert_response :success
-  # end
+  test "should get create" do
+    get :new, params: {id: @user}
+    assert_response :success
+  end
 
   test "should get edit" do
-    get :edit
+    get :new, params: {id: @user}
     assert_response :success
   end
 
   test "should get update" do
-    get :update
+    get :new, params: {id: @user}
     assert_response :success
   end
 

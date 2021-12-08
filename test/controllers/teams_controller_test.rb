@@ -10,7 +10,7 @@ class TeamsControllerTest < ActionController::TestCase
 
   # test "should get new" do
   #   get :new
-  #   assert_response :redirect
+  #   assert_response :success
   # end
 
   # test "should get create" do
