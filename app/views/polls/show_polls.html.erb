@@ -1,3 +1,7 @@
+<%# When the users look at the polls, they will see this file. This file allows
+the polls to be shown in tables based on their completeness. (open or
+completed) %>
+
 <%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
 <% if notice%>
     <p class="notice flex center"><%= notice %> </p>
@@ -46,7 +50,7 @@
                                 </div>
                                 <div>
                                 <div> <%= poll.description%> </div>
-                                <div> <%= poll.created_at%> </div>
+                                <div> <%= poll.created_at.to_date%> </div>
                                 <div> <%= poll.end_date%> </div>
                                 <% if poll.is_released %>
                                     <div>Released</div>
@@ -122,33 +126,6 @@
             </tr>
         </table>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <div class="font-normal bold font20 top-space poll">Closed Polls</div>
     <div class="table-show">

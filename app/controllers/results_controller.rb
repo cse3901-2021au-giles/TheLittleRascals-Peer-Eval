@@ -1,5 +1,6 @@
 # require_relative '../../lib/smtp'
 class ResultsController < ApplicationController
+    # Gather and create all fields so a result can be posted
     def new
         @result = Result.new
         @poll = Poll.find(params[:poll_id])
@@ -7,14 +8,14 @@ class ResultsController < ApplicationController
         @team = Team.find(params[:team_id])
         @user = User.find(session[:current_user])
     end 
-
+    # This is the code called when a user is filling out the form itself
     def create
         
         @poll_id = params[:poll_id]
         @team_id = params[:team_id]
         @rater_id = User.find(session[:current_user]).id
         @team = Team.find(@team_id)
-
+        # Grade each user that is on your team
         for user in @team.users
             @ratee_score = params[:"score_#{user.id}"]
             @ratee_comment = params[:"comment_#{user.id}"]
@@ -46,7 +47,10 @@ class ResultsController < ApplicationController
             #     render :new
             # end
 
-        end 
+        end
+        # Send the email that their form was completed. Then update fields and redirect
+        email = User.find(session[:current_user]).email
+        puts `\npython3 smtp.py #{email} "1"`
         @polling = Polling.where(user_id: session[:current_user], poll_id: @poll_id).first
         @polling.update_attribute(:is_complete, true)
         return redirect_to user_path(session[:current_user]), notice: "submitted successful"

@@ -1,3 +1,6 @@
+<%# This page is for creating a new user. On the /login page, a user is able to
+click "Sign Up" to create a new account. Here, the user inputs their first
+name, last name, email, password, and group name. %>
 
 <%= javascript_pack_tag 'custom', 'data-turbolinks-track': 'reload'%>
 <% if @error%>
@@ -19,11 +22,11 @@
 <div class="padding font-all-2 top-space">
 <% if @is_temp_user %>
 <%= form_for @user do |f| %>
-    <%= f.label :fname %>
+    <%= f.label :First_Name %>
     <br>
     <%= f.text_field :fname, :required =>  true%>
     <br>
-    <%= f.label :lname %>
+    <%= f.label :Last_Name %>
     <br>
     <%= f.text_field :lname, :required =>  true%>
     <br>
