@@ -1,9 +1,15 @@
+/*
+ * This file is for styling the table and navigation bar.
+ */
+
+/* making sure all tables have a fixed length */
 table {
     border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
 }
-  
+
+/* sets padding for table elements */
 td, th {
     text-align: left;
     padding: 8px;
@@ -16,16 +22,19 @@ td, th {
 .table-border {
     border: 1px solid rgb(141, 141, 141);
 }
-  
+
+/* makes the table have different colors for each row */
 tr:nth-child(even) {
     background-color: antiquewhite;
 }
 
+/* makes the table half the size */
 .table-half {
     max-width: 50%;
     flex: 1 auto;
 }
 
+/* for formatting the tables */
 .table-wrapper {
     display: flex;
     flex-direction: row;
@@ -33,6 +42,7 @@ tr:nth-child(even) {
     flex-wrap: wrap;
 }
 
+/* sets navigation bar elements to have padding */
 nav > *, nav div li {
     margin: 0 30px;
 }
